@@ -3,7 +3,7 @@
   <PropertyGroup>
     <TargetFramework>netstandard2.0</TargetFramework>
     <Version>0.1.0</Version>
-    <Copyright>Copyright BaristaLabs, LLC - 2019</Copyright>
+    <Copyright>Copyright (c) 2019 BaristaLabs, LLC</Copyright>
     <Description>Async based Paperspace API client library for .NET Core</Description>
     <PackageLicenseExpression>MIT</PackageLicenseExpression>
     <PackageTags>Paperspace API dotnetcore Cloud Machine Learning AI Gaming GPU</PackageTags>
@@ -12,6 +12,7 @@
     <PackageProjectUrl>https://github.com/BaristaLabs/paperspace.net</PackageProjectUrl>
     <RepositoryUrl>https://github.com/BaristaLabs/paperspace.net.git</RepositoryUrl>
     <RepositoryType>Git</RepositoryType>
+    <PackageIconUrl>https://github.com/BaristaLabs/paperspace.net/blob/master/Paperspace.jpg?raw=true</PackageIconUrl>
   </PropertyGroup>
 
   <ItemGroup>
