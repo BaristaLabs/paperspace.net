@@ -32,7 +32,7 @@
                 throw new InvalidOperationException("Unable to locate Windows 10 template.");
             }
 
-            Console.WriteLine("Starting new machine...");
+            Console.WriteLine("Creating new machine...");
             var newMachine = await client.Machines.Create(new CreateMachineRequest
             {
                 Region = Region.EastCoast_NY2,
@@ -53,7 +53,6 @@
             var machines = await client.Machines.List();
             Console.WriteLine(JsonConvert.SerializeObject(machines, Formatting.Indented));
 
-            // Stop doesn't work for some reason...
             Console.WriteLine($"Stopping {newMachine.Id}...");
             await client.Machines.Stop(newMachine.Id);
             newMachine = await client.Machines.Waitfor(newMachine.Id, MachineState.Off, 5000, 0, (m) => Console.WriteLine(m.State));
@@ -64,7 +63,6 @@
             machines = await client.Machines.List();
             Console.WriteLine(JsonConvert.SerializeObject(machines, Formatting.Indented));
 
-            // Nor does destroy... 
             Console.WriteLine($"Destroying {newMachine.Id}...");
             await client.Machines.Destroy(newMachine.Id);
 

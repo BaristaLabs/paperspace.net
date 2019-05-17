@@ -67,14 +67,18 @@
         private async Task<HttpResponseMessage> PostInternal(Uri uri, IDictionary<string, string> parameters = null, object body = null)
         {
             Ensure.ArgumentNotNull(uri, nameof(uri));
-            var requestContent = await Task.Run(() => JsonConvert.SerializeObject(body));
 
             var request = new HttpRequestMessage
             {
-                Content = new StringContent(requestContent, System.Text.Encoding.UTF8, "application/json"),
                 Method = HttpMethod.Post,
                 RequestUri = uri.ExtendQuery(parameters),
             };
+
+            if (body != null)
+            {
+                var requestContent = await Task.Run(() => JsonConvert.SerializeObject(body));
+                request.Content = new StringContent(requestContent, System.Text.Encoding.UTF8, "application/json");
+            }
 
             return await HttpClient.SendAsync(request);
         }
