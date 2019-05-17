@@ -2,7 +2,7 @@
 {
     using System;
 
-    internal static class ApiUrls
+    public static class ApiUrls
     {
         public static Uri MachinesCreate()
         {
