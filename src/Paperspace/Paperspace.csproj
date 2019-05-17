@@ -1,0 +1,21 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netstandard2.0</TargetFramework>
+    <Version>0.1.0</Version>
+    <Copyright>Copyright BaristaLabs, LLC - 2019</Copyright>
+    <Description>Async based Paperspace API client library for .NET Core</Description>
+    <PackageLicenseExpression>MIT</PackageLicenseExpression>
+    <PackageTags>Paperspace API dotnetcore Cloud Machine Learning AI Gaming GPU</PackageTags>
+    <AssemblyVersion>0.0.1.0</AssemblyVersion>
+    <FileVersion>0.0.1.0</FileVersion>
+    <PackageProjectUrl>https://github.com/BaristaLabs/paperspace.net</PackageProjectUrl>
+    <RepositoryUrl>https://github.com/BaristaLabs/paperspace.net.git</RepositoryUrl>
+    <RepositoryType>Git</RepositoryType>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Newtonsoft.Json" Version="12.0.2" />
+  </ItemGroup>
+
+</Project>

@@ -1,0 +1,31 @@
+﻿[
+  {
+    "id": "pslwpsvsx",
+    "name": "My Machine 1",
+    "os": "",
+    "ram": "4294967296",
+    "cpus": 2,
+    "gpu": "GRID K120Q (512MB)",
+    "storageTotal": "53687091200",
+    "storageUsed": "0",
+    "usageRate": "Air hourly",
+    "shutdownTimeoutInHours": 168,
+    "shutdownTimeoutForces": false,
+    "performAutoSnapshot": false,
+    "autoSnapshotFrequency": null,
+    "autoSnapshotSaveCount": null,
+    "dynamicPublicIp": false,
+    "agentType": "WindowsDesktop",
+    "dtCreated": "2019-05-17T01:54:33.210Z",
+    "state": "ready",
+    "updatesPending": false,
+    "networkId": "nng82wb",
+    "privateIpAddress": "10.64.10.60",
+    "publicIpAddress": null,
+    "region": "East Coast (NY2)",
+    "userId": "urtidqej",
+    "teamId": "teexixro4",
+    "scriptId": null,
+    "dtLastRun": null
+  }
+]
