@@ -24,10 +24,10 @@ steps:
   # Generate the report using ReportGenerator (https://github.com/danielpalme/ReportGenerator)
   # First install the tool, then run it
 - script: |
-    dotnet tool install -g dotnet-reportgenerator-globaltool
-    dotnet tool install -g coveralls.net --version 1.0.0
-    reportgenerator -reports:$(Build.SourcesDirectory)/test/**/coverage.cobertura.xml -targetdir:$(Build.SourcesDirectory)/CodeCoverage -reporttypes:HtmlInline_AzurePipelines;Cobertura
-    csmacnz.coveralls --dynamiccodecoverage -i $(Build.SourcesDirectory)/CodeCoverage/Cobertura.xml --repoToken $(COVERALLS_REPO_TOKEN) --commitId "$(Build.SourceVersion)" --commitBranch "$(Build.SourceBranchName)" --commitAuthor "$(Build.RequestedFor)" --commitEmail "$(Build.RequestedForEmail)" --commitMessage "$(Build.SourceVersionMessage)" --jobId "$(Build.BuildId)"
+    dotnet tool install --tool-path . dotnet-reportgenerator-globaltool
+    dotnet tool install --tool-path . coveralls.net --version 1.0.0
+    .\reportgenerator -reports:$(Build.SourcesDirectory)/test/**/coverage.cobertura.xml -targetdir:$(Build.SourcesDirectory)/CodeCoverage -reporttypes:HtmlInline_AzurePipelines;Cobertura
+    .\csmacnz.coveralls --dynamiccodecoverage -i $(Build.SourcesDirectory)/CodeCoverage/Cobertura.xml --repoToken $(COVERALLS_REPO_TOKEN) --commitId "$(Build.SourceVersion)" --commitBranch "$(Build.SourceBranchName)" --commitAuthor "$(Build.RequestedFor)" --commitEmail "$(Build.RequestedForEmail)" --commitMessage "$(Build.SourceVersionMessage)" --jobId "$(Build.BuildId)"
   displayName: Create Code coverage report
 
   # Publish the code coverage result (summary and web site)
