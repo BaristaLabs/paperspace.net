@@ -1,5 +1,6 @@
 pool:
   name: Hosted Ubuntu 1604
+
 steps:
 - task: DotNetCoreCLI@2
   displayName: Restore
@@ -18,7 +19,26 @@ steps:
   inputs:
     command: test
     projects: '$(Parameters.TestProjects)'
-    arguments: '--configuration $(BuildConfiguration)'
+    arguments: '--configuration $(BuildConfiguration) /p:CollectCoverage=true /p:CoverletOutputFormat=cobertura'
+  
+  # Generate the report using ReportGenerator (https://github.com/danielpalme/ReportGenerator)
+  # First install the tool, then run it
+- script: |
+    dotnet tool install -g dotnet-reportgenerator-globaltool
+    dotnet tool install -g coveralls.net --version 1.0.0
+    reportgenerator -reports:$(Build.SourcesDirectory)/test/**/coverage.cobertura.xml -targetdir:$(Build.SourcesDirectory)/CodeCoverage -reporttypes:HtmlInline_AzurePipelines;Cobertura
+    csmacnz.coveralls --dynamiccodecoverage -i $(Build.SourcesDirectory)/CodeCoverage/Cobertura.xml --repoToken $(COVERALLS_REPO_TOKEN) --commitId "$(Build.SourceVersion)" --commitBranch "$(Build.SourceBranchName)" --commitAuthor "$(Build.RequestedFor)" --commitEmail "$(Build.RequestedForEmail)" --commitMessage "$(Build.SourceVersionMessage)" --jobId "$(Build.BuildId)"
+  displayName: Create Code coverage report
+
+  # Publish the code coverage result (summary and web site)
+  # The summary allows to view the coverage percentage in the summary tab
+  # The web site allows to view which lines are covered directly in Azure Pipeline
+- task: PublishCodeCoverageResults@1
+  displayName: 'Publish code coverage'
+  inputs:
+    codeCoverageTool: Cobertura
+    summaryFileLocation: '$(Build.SourcesDirectory)/CodeCoverage/Cobertura.xml'
+    reportDirectory: '$(Build.SourcesDirectory)/CodeCoverage'
 
 - task: DotNetCoreCLI@2
   displayName: Pack
@@ -40,4 +60,3 @@ steps:
   inputs:
     PathtoPublish: '$(build.artifactstagingdirectory)'
   condition: succeededOrFailed()
-
