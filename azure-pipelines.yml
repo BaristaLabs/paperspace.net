@@ -26,11 +26,12 @@ steps:
   inputs:
     reports: 'test/**/coverage.cobertura.xml'
     targetdir: CodeCoverage
+    reporttypes: 'HtmlInline_AzurePipelines;Cobertura;Xml'
 
   # Report code coverage to coveralls.io
 - script: |
     dotnet tool install coveralls.net --version 1.0.0 --tool-path tools
-    ./tools/csmacnz.Coveralls --dynamiccodecoverage -i $(Build.SourcesDirectory)/CodeCoverage/Cobertura.xml --repoToken $(COVERALLS_REPO_TOKEN) --commitId "$(Build.SourceVersion)" --commitBranch "$(Build.SourceBranchName)" --commitAuthor "$(Build.RequestedFor)" --commitEmail "$(Build.RequestedForEmail)" --commitMessage "$(Build.SourceVersionMessage)" --jobId "$(Build.BuildId)"
+    ./tools/csmacnz.Coveralls --reportgenerator -i "CodeCoverage/" --repoToken $(COVERALLS_REPO_TOKEN) --commitId "$(Build.SourceVersion)" --commitBranch "$(Build.SourceBranchName)" --commitAuthor "$(Build.RequestedFor)" --commitEmail "$(Build.RequestedForEmail)" --commitMessage "$(Build.SourceVersionMessage)" --jobId "$(Build.BuildId)"
   displayName: Publish code coverage report to coveralls
 
   # Publish the code coverage result (summary and web site)
@@ -40,8 +41,8 @@ steps:
   displayName: 'Publish code coverage'
   inputs:
     codeCoverageTool: Cobertura
-    summaryFileLocation: '$(Build.SourcesDirectory)/CodeCoverage/Cobertura.xml'
-    reportDirectory: '$(Build.SourcesDirectory)/CodeCoverage'
+    summaryFileLocation: 'CodeCoverage/Cobertura.xml'
+    reportDirectory: 'CodeCoverage'
 
 - task: DotNetCoreCLI@2
   displayName: Pack
