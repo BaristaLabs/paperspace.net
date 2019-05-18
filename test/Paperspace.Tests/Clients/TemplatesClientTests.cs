@@ -16,7 +16,7 @@
             connection.Setup(c => c.Get<IList<Template>>(ApiUrls.TemplatesList(), null))
                 .ReturnsAsync(() =>
                 {
-                    var json = Properties.Resources.ListTemplates;
+                    var json = System.IO.File.ReadAllText("./Fixtures/ListTemplates.json");
                     return JsonConvert.DeserializeObject<IList<Template>>(json);
                 });
 
