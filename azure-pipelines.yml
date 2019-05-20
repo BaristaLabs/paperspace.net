@@ -1,6 +1,24 @@
 pool:
   name: Hosted Ubuntu 1604
+  
+trigger:
+  branches:
+    include:
+      - master
+  paths:
+    exclude:
+      - **/README.md
 
+pr:
+  branches:
+    include:
+      - master
+  paths:
+    include:
+      - **/*
+    exclude:
+      - **/README.md
+  
 steps:
 - task: DotNetCoreCLI@2
   displayName: Restore
