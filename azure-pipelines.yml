@@ -7,7 +7,7 @@ trigger:
       - master
   paths:
     exclude:
-      - '**/README.md'
+      - README.md
 
 pr:
   branches:
@@ -17,7 +17,7 @@ pr:
     include:
       - '**/*'
     exclude:
-      - '**/README.md'
+      - README.md
   
 steps:
 - task: DotNetCoreCLI@2
