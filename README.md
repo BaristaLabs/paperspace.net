@@ -18,5 +18,17 @@ var templates = await paperspace.Templates.List();
 var w10template = templates.FirstOrDefault(t => t.OS == "Windows 10 (Server 2016) - Licensed");
 Console.WriteLine(w10template.Label + " is available for creation!");
 ```
+Create new virtual machine
+
+``` c#
+var newMachine = await client.Machines.Create(new CreateMachineRequest
+{
+    Region = Region.EastCoast_NY2,
+    MachineType = MachineType.Air,
+    Size = 50,
+    BillingType = BillingType.Hourly,
+    MachineName = "My Machine 1",
+    TemplateId = w10template.Id,
+});
 
 Other samples [available here](https://github.com/BaristaLabs/paperspace.net/tree/master/samples)
