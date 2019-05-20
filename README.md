@@ -30,5 +30,6 @@ var newMachine = await client.Machines.Create(new CreateMachineRequest
     MachineName = "My Machine 1",
     TemplateId = w10template.Id,
 });
+```
 
 Other samples [available here](https://github.com/BaristaLabs/paperspace.net/tree/master/samples)
