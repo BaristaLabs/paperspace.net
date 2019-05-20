@@ -1,6 +1,7 @@
 # Paperspace.net
 
 [![Build Status](https://dev.azure.com/baristalabs/Paperspace/_apis/build/status/Paperspace-.NET%20Core-CI?branchName=master)](https://dev.azure.com/baristalabs/Paperspace/_build/latest?definitionId=6&branchName=master)
+[![DevOps Coverage Status](https://img.shields.io/azure-devops/coverage/baristalabs/paperspace/7/master.svg)
 [![Coverage Status](https://img.shields.io/coveralls/github/BaristaLabs/paperspace.net/master.svg)](https://coveralls.io/github/BaristaLabs/paperspace.net?branch=master)
 [![NuGet](http://img.shields.io/nuget/v/Paperspace.svg)](https://www.nuget.org/packages/Paperspace)
 
