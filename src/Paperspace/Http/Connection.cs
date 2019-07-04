@@ -83,6 +83,11 @@
             return await HttpClient.SendAsync(request);
         }
 
+        /// <summary>
+        /// Ensures that the response returned a 4xx. If not, throws an exception with the error body.
+        /// </summary>
+        /// <param name="response"></param>
+        /// <returns></returns>
         static async Task EnsureSuccessStatusCode(HttpResponseMessage response)
         {
             if ((int)response.StatusCode >= 400)

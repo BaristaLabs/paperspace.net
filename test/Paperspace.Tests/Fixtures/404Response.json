@@ -1,0 +1,7 @@
+﻿{
+  "error": {
+    "name": "Error",
+    "status": 404,
+    "message": "Not found. Please contact support@paperspace.com for help."
+  }
+}
