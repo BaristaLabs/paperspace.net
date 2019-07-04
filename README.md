@@ -15,7 +15,7 @@ Get available templates.
 ```c#
 var paperspace = new PaperspaceClient("<Paperspace API Key>");
 var templates = await paperspace.Templates.List();
-var w10template = templates.FirstOrDefault(t => t.OS == "Windows 10 (Server 2016) - Licensed");
+var w10template = templates.FirstOrDefault(t => t.OS == "Windows 10 (Server 2019) - Licensed");
 Console.WriteLine(w10template.Label + " is available for creation!");
 ```
 Create new virtual machine

@@ -25,29 +25,34 @@
             Console.WriteLine("Listing Templates...");
             Console.WriteLine(JsonConvert.SerializeObject(templates, Formatting.Indented));
 
-            var template = templates.FirstOrDefault(t => t.OS == "Windows 10 (Server 2016) - Licensed");
+            var template = templates.FirstOrDefault(t => t.OS == "Windows 10 (Server 2019) - Licensed");
 
             if (template == null)
             {
                 throw new InvalidOperationException("Unable to locate Windows 10 template.");
             }
 
-            Console.WriteLine("Creating new machine...");
-            var newMachine = await client.Machines.Create(new CreateMachineRequest
+            //Console.WriteLine("Creating new machine...");
+            //var newMachine = await client.Machines.Create(new CreateMachineRequest
+            //{
+            //    Region = Region.EastCoast_NY2,
+            //    MachineType = MachineType.Air,
+            //    Size = 50,
+            //    BillingType = BillingType.Hourly,
+            //    MachineName = "My Machine 1",
+            //    TemplateId = template.Id,
+            //});
+
+            //Console.WriteLine($"A new machine with the id of {newMachine.Id} is now {newMachine.State}");
+
+            //newMachine = await client.Machines.Waitfor(newMachine.Id, MachineState.Ready, 5000, 0, (m) => Console.WriteLine(m.State));
+
+            //Console.WriteLine($"Machine with the id of {newMachine.Id} is now {newMachine.State}");
+
+            var newMachine = new Machine()
             {
-                Region = Region.EastCoast_NY2,
-                MachineType = MachineType.Air,
-                Size = 50,
-                BillingType = BillingType.Hourly,
-                MachineName = "My Machine 1",
-                TemplateId = template.Id,
-            });
-
-            Console.WriteLine($"A new machine with the id of {newMachine.Id} is now {newMachine.State}");
-
-            newMachine = await client.Machines.Waitfor(newMachine.Id, MachineState.Ready, 5000, 0, (m) => Console.WriteLine(m.State));
-
-            Console.WriteLine($"Machine with the id of {newMachine.Id} is now {newMachine.State}");
+                Id = "12345"
+            };
 
             Console.WriteLine("Listing Machines...");
             var machines = await client.Machines.List();
