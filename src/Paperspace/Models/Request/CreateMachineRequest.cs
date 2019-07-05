@@ -1,7 +1,6 @@
 ﻿namespace Paperspace
 {
     using Newtonsoft.Json;
-    using Newtonsoft.Json.Converters;
 
     [JsonObject(ItemNullValueHandling = NullValueHandling.Ignore)]
     public class CreateMachineRequest
