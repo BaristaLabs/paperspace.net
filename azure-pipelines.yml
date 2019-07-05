@@ -78,6 +78,7 @@ steps:
     command: push
     nuGetFeedType: external
     publishFeedCredentials: 'nuget.org'
+    continueOnError: true
 
 - task: PublishBuildArtifacts@1
   displayName: 'Publish Artifact'
