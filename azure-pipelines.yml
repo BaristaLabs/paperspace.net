@@ -11,8 +11,8 @@ trigger:
 
 pr:
   branches:
-    include:
-      - *
+    exclude:
+      - master
   paths:
     include:
       - '**/*'
