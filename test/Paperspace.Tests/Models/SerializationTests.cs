@@ -32,6 +32,22 @@
         }
 
         [TestMethod]
+        public void Can_Serialize_CreateResourceDelegationRequest()
+        {
+            var json = System.IO.File.ReadAllText("./Fixtures/ResourceDelegations_CreateDelegation_Request.json");
+            var createRDRequest = JsonConvert.DeserializeObject<CreateResourceDelegationRequest>(json);
+            JsonConvert.SerializeObject(createRDRequest);
+        }
+
+        [TestMethod]
+        public void Can_Serialize_CreateResourceDelegation()
+        {
+            var json = System.IO.File.ReadAllText("./Fixtures/ResourceDelegations_CreateDelegation.json");
+            var resourceDelegations = JsonConvert.DeserializeObject<IList<ResourceDelegation>>(json);
+            JsonConvert.SerializeObject(resourceDelegations);
+        }
+
+        [TestMethod]
         public void Can_Serialize_CreateScriptRequest()
         {
             var json = System.IO.File.ReadAllText("./Fixtures/Scripts_CreateScript_Request.json");

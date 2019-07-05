@@ -1,6 +1,7 @@
 ﻿namespace PaperspaceConsoleTest
 {
     using System;
+    using System.Collections.Generic;
     using System.IO;
     using System.Linq;
     using System.Threading.Tasks;
@@ -20,9 +21,10 @@
               .Build();
 
             var client = new PaperspaceClient(config["PAPERSPACE_API_KEY"]);
-            //await MachineFullLifecycleSample(client);
-            //await NetworksSample(client);
-            //await ScriptFullLifecycleSample(client);
+            await MachineFullLifecycleSample(client);
+            await NetworksSample(client);
+            await ResourceDelegationSample(client);
+            await ScriptFullLifecycleSample(client);
             await UsersSample(client);
 
             Console.WriteLine("All done!!");
@@ -195,6 +197,24 @@
             Console.WriteLine("Listing Users...");
             var users = await client.Users.List();
             Console.WriteLine(JsonConvert.SerializeObject(users, Formatting.Indented));
+        }
+
+        /// <summary>
+        /// Demonstrates the ResourceDelegations Client
+        /// </summary>
+        /// <param name="client"></param>
+        /// <returns></returns>
+        static async Task ResourceDelegationSample(IPaperspaceClient client)
+        {
+            Console.WriteLine("Creating Resource Delegation...");
+            var resourceDelegations = await client.ResourceDelegations.Create(new CreateResourceDelegationRequest()
+            {
+                Machine = new CreateResourceDelegationMachine()
+                {
+                    Ids = new List<string>() { "1234", "4567 " }
+                }
+            });
+            Console.WriteLine(JsonConvert.SerializeObject(resourceDelegations, Formatting.Indented));
         }
     }
 }

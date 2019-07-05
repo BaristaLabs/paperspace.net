@@ -56,6 +56,11 @@
             return $"/networks/getNetworks".FormatUri();
         }
 
+        public static Uri ResourceDelegationsCreate()
+        {
+            return $"/resourceDelegations/create".FormatUri();
+        }
+
         public static Uri ScriptsCreate()
         {
             return $"/scripts/createScript".FormatUri();
