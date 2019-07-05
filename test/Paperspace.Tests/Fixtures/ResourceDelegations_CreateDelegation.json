@@ -1,0 +1,16 @@
+﻿[
+  {
+    "delegation": {
+      "machine": {
+        "ids": [
+          "m123abc",
+          "m456def"
+        ]
+      }
+    },
+    "isEnabled": true,
+    "accessTokenId": "resource-delegation-token-123abc123abc123abc123abc123abc123abc123abc123abc123abc123abc",
+    "dtCreated": "2019-04-03T12:31:40.061Z",
+    "id": 123
+  }
+]
