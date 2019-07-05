@@ -1,0 +1,19 @@
+﻿{
+  "region": "East Coast (NY2)",
+  "machineType": "Air",
+  "size": 50,
+  "billingType": "hourly",
+  "machineName": "My Machine 1",
+  "templateId": "tk9izniv",
+  "assignPublicIp": false,
+  "dynamicPublicIp": false,
+  "userId": "12345",
+  "teamId": "12345",
+  "scriptId": "12345",
+  "password": "123123123",
+  "notificationEmail": "asdf@asdf.com",
+  "networkId": "12345",
+  "lastName": "asdf",
+  "firstName": "asdf",
+  "email": "asdf"
+}

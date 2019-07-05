@@ -93,11 +93,16 @@
             var subjectUnderTest = new Connection("12345", new Uri("https://api.paperspace.io/", UriKind.Absolute), httpClient);
 
             // ACT
-            await Assert.ThrowsExceptionAsync<PaperspaceException>(() =>
+            var psEx = await Assert.ThrowsExceptionAsync<PaperspaceException>(() =>
             {
                 return subjectUnderTest
                 .Get<MockResponse>(new Uri("api/test/whatever", UriKind.Relative));
             });
+
+            Assert.AreEqual(404, psEx.StatusCode);
+            Assert.AreEqual("Error", psEx.Name);
+            Assert.IsNotNull(psEx.Error);
+            Assert.IsTrue(psEx.ToString().StartsWith("Error (404): Paperspace.PaperspaceException: Not found. Please contact support@paperspace.com for help.\r\n"));
         }
 
         [TestMethod]
@@ -214,6 +219,13 @@
                ),
                ItExpr.IsAny<CancellationToken>()
             );
+        }
+
+        [TestMethod]
+        public void Can_Construct_Connection_With_Default_Uri_And_HttpClient()
+        {
+            var subjectUnderTest = new Connection("12345");
+            Assert.IsNotNull(subjectUnderTest);
         }
 
         private class MockRequest

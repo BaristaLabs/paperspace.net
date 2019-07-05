@@ -16,12 +16,39 @@
             connection.Setup(c => c.Get<IList<Template>>(ApiUrls.TemplatesList(), null))
                 .ReturnsAsync(() =>
                 {
-                    var json = System.IO.File.ReadAllText("./Fixtures/ListTemplates.json");
+                    var json = System.IO.File.ReadAllText("./Fixtures/Templates_ListTemplates.json");
                     return JsonConvert.DeserializeObject<IList<Template>>(json);
                 });
 
             var templateClient = new TemplatesClient(connection.Object);
             var result = await templateClient.List();
+
+            Assert.AreEqual(result.Count, 14);
+        }
+
+        [TestMethod]
+        public async Task TemplatesClient_List_With_Filter()
+        {
+            var connection = new Mock<IConnection>();
+            connection.Setup(c => c.Get<IList<Template>>(ApiUrls.TemplatesList(), It.IsAny<IDictionary<string, string>>()))
+                .ReturnsAsync(() =>
+                {
+                    var json = System.IO.File.ReadAllText("./Fixtures/Templates_ListTemplates.json");
+                    return JsonConvert.DeserializeObject<IList<Template>>(json);
+                });
+
+            var templateClient = new TemplatesClient(connection.Object);
+            var result = await templateClient.List(new TemplateFilter()
+            {
+                Id = "1234",
+                Label = "Windows 10",
+                OS = "Windows 10 (Server 2019) - Licensed",
+                Region = "",
+                Name = "paperspace/tk9izniv",
+                DTCreated = new System.DateTime(),
+                UserId = "12345",
+                TeamId = "12354"
+            });
 
             Assert.AreEqual(result.Count, 14);
         }

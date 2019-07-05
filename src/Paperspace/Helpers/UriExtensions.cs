@@ -36,11 +36,11 @@
             {
                 var urlSplit = baseUrl.Split('?');
                 baseUrl = urlSplit[0];
-                queryString = urlSplit.Length > 1 ? urlSplit[1] : string.Empty;
+                queryString = urlSplit[1];
             }
 
             NameValueCollection queryCollection = HttpUtility.ParseQueryString(queryString);
-            foreach (var kvp in values ?? new Dictionary<string, string>())
+            foreach (var kvp in values)
             {
                 queryCollection[kvp.Key] = kvp.Value;
             }

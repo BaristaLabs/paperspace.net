@@ -1,0 +1,40 @@
+﻿{
+  "id": "psxs9sp8u",
+  "name": "My Machine 1",
+  "os": null,
+  "ram": null,
+  "cpus": 1,
+  "gpu": null,
+  "storageTotal": null,
+  "storageUsed": null,
+  "usageRate": "Air hourly",
+  "shutdownTimeoutInHours": 168,
+  "shutdownTimeoutForces": false,
+  "performAutoSnapshot": false,
+  "autoSnapshotFrequency": null,
+  "autoSnapshotSaveCount": null,
+  "dynamicPublicIp": false,
+  "agentType": "WindowsDesktop",
+  "dtCreated": "2019-07-04T19:21:50.506Z",
+  "state": "provisioning",
+  "updatesPending": false,
+  "networkId": null,
+  "privateIpAddress": null,
+  "publicIpAddress": null,
+  "region": null,
+  "userId": "urtidqej",
+  "teamId": "teexixro4",
+  "scriptId": null,
+  "dtLastRun": null,
+  "events": [
+    {
+      "name": "create",
+      "state": "new",
+      "errorMsg": "",
+      "handle": "d46d0595-f2b9-4fb7-b291-70583ca778a5",
+      "dtModified": "2019-07-04T19:21:50.506Z",
+      "dtFinished": null,
+      "dtCreated": "2019-07-04T19:21:50.506Z"
+    }
+  ]
+}

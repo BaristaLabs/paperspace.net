@@ -4,6 +4,7 @@
     using Newtonsoft.Json.Converters;
     using System;
 
+    [JsonObject(ItemNullValueHandling = NullValueHandling.Ignore)]
     public class TemplateFilter
     {
         /// <summary>
@@ -51,7 +52,7 @@
         /// </summary>
         [JsonProperty("dtCreated")]
         [JsonConverter(typeof(IsoDateTimeConverter))]
-        public DateTime DTCreated
+        public DateTime? DTCreated
         {
             get;
             set;

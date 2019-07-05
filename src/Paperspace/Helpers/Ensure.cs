@@ -8,7 +8,7 @@
     /// <summary>
     ///   Ensure input parameters
     /// </summary>
-    internal static class Ensure
+    public static class Ensure
     {
         /// <summary>
         /// Checks an argument to ensure it isn't null.
