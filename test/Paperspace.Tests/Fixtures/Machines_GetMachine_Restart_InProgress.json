@@ -1,0 +1,76 @@
+﻿{
+  "id": "psxs9sp8u",
+  "name": "My Machine 1",
+  "os": "",
+  "ram": "4294967296",
+  "cpus": 2,
+  "gpu": "GRID K120Q (512MB)",
+  "storageTotal": "53687091200",
+  "storageUsed": "0",
+  "usageRate": "Air hourly",
+  "shutdownTimeoutInHours": 168,
+  "shutdownTimeoutForces": false,
+  "performAutoSnapshot": false,
+  "autoSnapshotFrequency": null,
+  "autoSnapshotSaveCount": null,
+  "dynamicPublicIp": false,
+  "agentType": "WindowsDesktop",
+  "dtCreated": "2019-07-04T19:21:50.506Z",
+  "state": "restarting",
+  "updatesPending": false,
+  "networkId": "nng82wb",
+  "privateIpAddress": "10.64.14.145",
+  "publicIpAddress": null,
+  "region": "East Coast (NY2)",
+  "userId": "urtidqej",
+  "teamId": "teexixro4",
+  "scriptId": null,
+  "dtLastRun": null,
+  "events": [
+    {
+      "name": "restart",
+      "state": "done",
+      "errorMsg": "",
+      "handle": "deca708b-ac01-49b3-b21a-27c249112e08",
+      "dtModified": "2019-07-04T19:34:57.178Z",
+      "dtFinished": "2019-07-04T19:34:57.178Z",
+      "dtCreated": "2019-07-04T19:34:22.485Z"
+    },
+    {
+      "name": "start",
+      "state": "done",
+      "errorMsg": "",
+      "handle": "085333f6-783a-4ffe-b1b1-a8b6c21a0965",
+      "dtModified": "2019-07-04T19:33:05.258Z",
+      "dtFinished": "2019-07-04T19:33:05.258Z",
+      "dtCreated": "2019-07-04T19:32:44.820Z"
+    },
+    {
+      "name": "stop",
+      "state": "done",
+      "errorMsg": "",
+      "handle": "81345f39-406f-4c4a-a085-7e4e55f039e5",
+      "dtModified": "2019-07-04T19:28:10.356Z",
+      "dtFinished": "2019-07-04T19:28:10.356Z",
+      "dtCreated": "2019-07-04T19:27:02.739Z"
+    },
+    {
+      "name": "start",
+      "state": "done",
+      "errorMsg": "",
+      "handle": "e4d3b87d-2d9c-4354-8533-0a4b6d9f6c33",
+      "dtModified": "2019-07-04T19:22:47.825Z",
+      "dtFinished": "2019-07-04T19:22:47.825Z",
+      "dtCreated": "2019-07-04T19:22:22.271Z"
+    },
+    {
+      "name": "create",
+      "state": "done",
+      "errorMsg": "",
+      "handle": "d46d0595-f2b9-4fb7-b291-70583ca778a5",
+      "dtModified": "2019-07-04T19:22:22.281Z",
+      "dtFinished": "2019-07-04T19:22:22.281Z",
+      "dtCreated": "2019-07-04T19:21:50.506Z"
+    }
+  ]
+}

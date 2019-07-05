@@ -6,13 +6,12 @@ trigger:
     include:
       - master
   paths:
+    include:
+      - '**/*'
     exclude:
       - README.md
 
 pr:
-  branches:
-    include:
-      - master
   paths:
     include:
       - '**/*'
@@ -67,14 +66,14 @@ steps:
   inputs:
     command: pack
     packagesToPack: src/Paperspace/Paperspace.csproj
+    includesymbols: true
 
 - task: DotNetCoreCLI@2
   displayName: 'NuGet Push'
   inputs:
     command: push
     nuGetFeedType: external
-    publishFeedCredentials: nuget.org
-  enabled: false
+    externalEndPoint: 'nuget.org'
   continueOnError: true
 
 - task: PublishBuildArtifacts@1

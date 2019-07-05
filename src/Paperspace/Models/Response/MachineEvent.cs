@@ -17,7 +17,7 @@
         }
 
         [JsonProperty("state")]
-        public string State
+        public MachineEventState State
         {
             get;
             set;

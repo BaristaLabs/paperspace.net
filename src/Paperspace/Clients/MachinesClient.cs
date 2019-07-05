@@ -3,6 +3,7 @@
     using System;
     using System.Collections.Generic;
     using System.Diagnostics;
+    using System.Threading;
     using System.Threading.Tasks;
 
     public class MachinesClient : ApiClient, IMachinesClient
@@ -65,26 +66,36 @@
                     throw new ArgumentOutOfRangeException("state must be either off, serviceready, or ready");
             }
 
-            var sw = new Stopwatch();
-            sw.Start();
-
-            Machine machineInfo = null;
-            do
+            var cts = new CancellationTokenSource();
+            if (maxWaitMS > 0)
             {
-                if (machineInfo != null)
+                cts.CancelAfter(maxWaitMS);
+            }
+
+            try
+            {
+                Machine machineInfo = null;
+                do
                 {
-                    await Task.Delay(pollIntervalMS);
-                }
+                    if (machineInfo != null)
+                    {
+                        await Task.Delay(pollIntervalMS, cts.Token);
+                    }
 
-                machineInfo = await Show(machineId);
+                    machineInfo = await Show(machineId);
 
-                pollResultCallback?.Invoke(machineInfo);
+                    if (pollResultCallback != null)
+                    {
+                        pollResultCallback.Invoke(machineInfo);
+                    }
+                } while (machineInfo.State != targetState);
 
-            } while (machineInfo.State != targetState || maxWaitMS > 0 ? sw.ElapsedMilliseconds >= maxWaitMS : false);
-
-            sw.Stop();
-
-            return machineInfo;
+                return machineInfo;
+            }
+            catch(OperationCanceledException)
+            {
+                throw new TimeoutException($"The maximum time to wait has been exceeded ({maxWaitMS}).");
+            }
         }
     }
 }
