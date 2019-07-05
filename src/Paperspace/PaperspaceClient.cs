@@ -39,6 +39,7 @@
             Networks = new NetworksClient(connection);
             Scripts = new ScriptsClient(connection);
             Templates = new TemplatesClient(connection);
+            Users = new UsersClient(connection);
         }
 
         /// <summary>
@@ -69,14 +70,6 @@
         /// Refer to the API documentation for more information: https://paperspace.github.io/paperspace-node/networks.html
         /// </remarks>
         public INetworksClient Networks { get; }
-
-        /// <summary>
-        /// Access Paperspace's Project API.
-        /// </summary>
-        /// <remarks>
-        /// Refer to the API documentation for more information: https://paperspace.github.io/paperspace-node/project.html
-        /// </remarks>
-        public IProjectClient Project { get; }
 
         /// <summary>
         /// Access Paperspace's Resource Delegations API.

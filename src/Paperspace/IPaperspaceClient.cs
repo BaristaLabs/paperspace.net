@@ -32,14 +32,6 @@
         INetworksClient Networks { get; }
 
         /// <summary>
-        /// Access Paperspace's Project API.
-        /// </summary>
-        /// <remarks>
-        /// Refer to the API documentation for more information: https://paperspace.github.io/paperspace-node/project.html
-        /// </remarks>
-        IProjectClient Project { get; }
-
-        /// <summary>
         /// Access Paperspace's Resource Delegations API.
         /// </summary>
         /// <remarks>

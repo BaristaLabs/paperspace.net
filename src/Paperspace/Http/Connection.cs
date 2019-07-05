@@ -78,6 +78,7 @@
             {
                 var requestContent = await Task.Run(() => JsonConvert.SerializeObject(body));
                 request.Content = new StringContent(requestContent, System.Text.Encoding.UTF8, "application/json");
+                var conten = new MultipartContent();
             }
 
             return await HttpClient.SendAsync(request);

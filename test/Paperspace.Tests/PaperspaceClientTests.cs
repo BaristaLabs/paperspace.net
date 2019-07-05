@@ -28,12 +28,11 @@
             Assert.IsNotNull(client.Networks);
             Assert.IsNotNull(client.Scripts);
             Assert.IsNotNull(client.Templates);
+            Assert.IsNotNull(client.Users);
 
             // Not Implemented Yet:
             Assert.IsNull(client.Jobs);
-            Assert.IsNull(client.Project);
             Assert.IsNull(client.ResourceDelegations);
-            Assert.IsNull(client.Users);
         }
     }
 }

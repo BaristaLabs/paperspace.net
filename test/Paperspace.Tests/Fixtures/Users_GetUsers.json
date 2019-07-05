@@ -1,0 +1,22 @@
+﻿[
+  {
+    "id": "u123abc",
+    "email": "jon@example.com",
+    "firstname": "Jon",
+    "lastname": "Snow",
+    "isAdmin": false,
+    "isOwner": false,
+    "dtCreated": "2017-04-15T16:20:59.609Z",
+    "teamId": "te456def"
+  },
+  {
+    "id": "u789ghi",
+    "email": "jeff@example.com",
+    "firstname": "Jeff",
+    "lastname": "Green",
+    "isAdmin": true,
+    "isOwner": true,
+    "dtCreated": "2016-12-07T15:59:09.769Z",
+    "teamId": "te456def"
+  }
+]
