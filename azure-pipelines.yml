@@ -6,13 +6,12 @@ trigger:
     include:
       - master
   paths:
+    include:
+      - '**/*'
     exclude:
       - README.md
 
 pr:
-  branches:
-    exclude:
-      - master
   paths:
     include:
       - '**/*'
