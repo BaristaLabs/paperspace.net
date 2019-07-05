@@ -67,6 +67,7 @@ steps:
   inputs:
     command: pack
     packagesToPack: src/Paperspace/Paperspace.csproj
+    includesymbols: true
 
 - task: DotNetCoreCLI@2
   displayName: 'NuGet Push'
