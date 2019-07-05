@@ -102,7 +102,7 @@
             Assert.AreEqual(404, psEx.StatusCode);
             Assert.AreEqual("Error", psEx.Name);
             Assert.IsNotNull(psEx.Error);
-            Assert.IsTrue(psEx.ToString().StartsWith("Error (404): Paperspace.PaperspaceException: Not found. Please contact support@paperspace.com for help.\r\n"));
+            Assert.IsTrue(psEx.ToString().StartsWith("Error (404): Paperspace.PaperspaceException: Not found. Please contact support@paperspace.com for help."));
         }
 
         [TestMethod]
