@@ -29,14 +29,14 @@ steps:
   displayName: Build
   inputs:
     projects: '**/*.csproj'
-    arguments: '--no-restore --configuration $(BuildConfiguration)'
+    arguments: '--no-restore --configuration Release'
 
 - task: DotNetCoreCLI@2
   displayName: Test
   inputs:
     command: test
     projects: 'test/**/*.csproj'
-    arguments: '--no-restore --configuration $(BuildConfiguration) /p:CollectCoverage=true /p:CoverletOutputFormat=cobertura'
+    arguments: '--no-restore --configuration Release /p:CollectCoverage=true /p:CoverletOutputFormat=cobertura'
 
 - task: Palmmedia.reportgenerator.reportgenerator-build-release-task.reportgenerator@4
   displayName: Create code coverage report
