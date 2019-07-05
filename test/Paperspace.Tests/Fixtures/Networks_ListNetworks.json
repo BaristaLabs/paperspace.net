@@ -1,0 +1,11 @@
+﻿[
+  {
+    "id": "n123abc",
+    "name": "My Network",
+    "region": "East Coast (NY2)",
+    "dtCreated": "2019-07-05T17:40:19.907Z",
+    "network": "10.64.21.0",
+    "netmask": "255.255.255.0",
+    "teamId": "te456def"
+  }
+]

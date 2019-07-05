@@ -4,28 +4,28 @@
     using System.Collections.Generic;
     using System.Threading.Tasks;
 
-    public class TemplatesClient : ApiClient, ITemplatesClient
+    public class NetworksClient : ApiClient, INetworksClient
     {
         /// <summary>
-        /// Instantiates a new Paperspace Templates API client.
+        /// Instantiates a new Paperspace Networks API client.
         /// </summary>
         /// <param name="connection">A connection</param>
-        public TemplatesClient(IConnection connection)
+        public NetworksClient(IConnection connection)
             : base(connection)
         {
         }
 
-        public Task<IList<Template>> List(TemplateFilter filter = null)
+        public Task<IList<Network>> List(NetworkFilter filter = null)
         {
             if (filter == null)
             {
-                return Connection.Get<IList<Template>>(ApiUrls.TemplatesList());
+                return Connection.Get<IList<Network>>(ApiUrls.NetworksList());
             }
             else
             {
                 var parameters = new Dictionary<string, string>();
-                var jObj  = JObject.FromObject(filter);
-                foreach(var property in jObj)
+                var jObj = JObject.FromObject(filter);
+                foreach (var property in jObj)
                 {
                     if (property.Value != null)
                     {
@@ -33,7 +33,7 @@
                     }
                 }
 
-                return Connection.Get<IList<Template>>(ApiUrls.TemplatesList(),  parameters);
+                return Connection.Get<IList<Network>>(ApiUrls.NetworksList(), parameters);
             }
         }
     }

@@ -20,7 +20,8 @@
               .Build();
 
             var client = new PaperspaceClient(config["PAPERSPACE_API_KEY"]);
-            // await MachineFullLifecycleSample(client);
+            await MachineFullLifecycleSample(client);
+            await NetworksSample(client);
             await ScriptFullLifecycleSample(client);
 
             Console.WriteLine("All done!!");
@@ -118,6 +119,18 @@
             Console.WriteLine("Listing Machines...");
             machines = await client.Machines.List();
             Console.WriteLine(JsonConvert.SerializeObject(machines, Formatting.Indented));
+        }
+
+        /// <summary>
+        /// Demonstrates the Networks Client
+        /// </summary>
+        /// <param name="client"></param>
+        /// <returns></returns>
+        static async Task NetworksSample(IPaperspaceClient client)
+        {
+            Console.WriteLine("Listing Networks...");
+            var networks = await client.Networks.List();
+            Console.WriteLine(JsonConvert.SerializeObject(networks, Formatting.Indented));
         }
 
         /// <summary>

@@ -31,6 +31,9 @@
     <None Update="Fixtures\404Response.json">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
+    <None Update="Fixtures\Networks_ListNetworks.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
     <None Update="Fixtures\Scripts_CreateScript_Request.json">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
