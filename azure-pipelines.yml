@@ -73,8 +73,7 @@ steps:
   inputs:
     command: push
     nuGetFeedType: external
-    publishFeedCredentials: nuget.org
-  enabled: false
+    externalEndPoint: 'nuget.org'
   continueOnError: true
 
 - task: PublishBuildArtifacts@1
