@@ -20,8 +20,22 @@
               .Build();
 
             var client = new PaperspaceClient(config["PAPERSPACE_API_KEY"]);
+            // await MachineFullLifecycleSample(client);
+            await ScriptFullLifecycleSample(client);
 
-            //List templates
+            Console.WriteLine("All done!!");
+        }
+
+        /// <summary>
+        /// Demonstrates a full Machine lifecycle: Create -> Stop -> Start -> Restart -> Destroy
+        /// </summary>
+        /// <param name="client"></param>
+        /// <returns></returns>
+        static async Task MachineFullLifecycleSample(IPaperspaceClient client)
+        {
+            // ----
+            // List all Windows 10 templates
+            // ----
             var templates = await client.Templates.List(new TemplateFilter() { Label = "Windows 10" });
             Console.WriteLine("Listing Templates...");
             Console.WriteLine(JsonConvert.SerializeObject(templates, Formatting.Indented));
@@ -32,6 +46,10 @@
             {
                 throw new InvalidOperationException("Unable to locate Windows 10 template.");
             }
+
+            // ----
+            // Create a new Machine
+            // ----
 
             Console.WriteLine("Creating new machine...");
             var newMachine = await client.Machines.Create(new CreateMachineRequest
@@ -100,8 +118,57 @@
             Console.WriteLine("Listing Machines...");
             machines = await client.Machines.List();
             Console.WriteLine(JsonConvert.SerializeObject(machines, Formatting.Indented));
+        }
 
-            Console.WriteLine("All done!!");
+        /// <summary>
+        /// Demonstrates a full Script lifecycle: Create -> List -> Show -> Text -> Destroy
+        /// </summary>
+        /// <param name="client"></param>
+        /// <returns></returns>
+        static async Task ScriptFullLifecycleSample(IPaperspaceClient client)
+        {
+            // ----
+            // Create a new Script
+            // ----
+
+            Console.WriteLine("Creating new script...");
+            var newScript = await client.Scripts.Create(new CreateScriptRequest
+            {
+                ScriptName = "My Script",
+                ScriptText = "echo Hello, World!",
+                ScriptDescription = "A startup script",
+                IsEnabled = true,
+                RunOnce = false
+            });
+
+            Console.WriteLine($"A new script with the id of {newScript.Id} has been created.");
+
+            Console.WriteLine($"Listing Scripts...");
+            var scripts = await client.Scripts.List();
+            Console.WriteLine(JsonConvert.SerializeObject(scripts, Formatting.Indented));
+
+            // ----
+            // Show the script we created
+            // ----
+            Console.WriteLine($"Showing script {newScript.Id}...");
+            var script = await client.Scripts.Show(newScript.Id);
+            Console.WriteLine(JsonConvert.SerializeObject(script, Formatting.Indented));
+
+            // ----
+            // Get the text of the script we cdreated
+            // ----
+            Console.WriteLine($"Showing script text of {newScript.Id}...");
+            var text = await client.Scripts.Text(newScript.Id);
+            Console.WriteLine(text);
+
+            // ----
+            // Destroy script we created
+            // ----
+            Console.WriteLine($"Destroying {newScript.Id}...");
+            await client.Scripts.Destroy(newScript.Id);
+
+            scripts = await client.Scripts.List();
+            Console.WriteLine(JsonConvert.SerializeObject(scripts, Formatting.Indented));
         }
     }
 }

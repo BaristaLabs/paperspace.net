@@ -23,6 +23,22 @@
         }
 
         [TestMethod]
+        public void Can_Serialize_CreateScriptRequest()
+        {
+            var json = System.IO.File.ReadAllText("./Fixtures/Scripts_CreateScript_Request.json");
+            var createScriptRequest = JsonConvert.DeserializeObject<CreateScriptRequest>(json);
+            JsonConvert.SerializeObject(createScriptRequest);
+        }
+
+        [TestMethod]
+        public void Can_Serialize_Script()
+        {
+            var json = System.IO.File.ReadAllText("./Fixtures/Scripts_GetScript.json");
+            var script = JsonConvert.DeserializeObject<Script>(json);
+            JsonConvert.SerializeObject(script);
+        }
+
+        [TestMethod]
         public void Can_Serialize_Template()
         {
             var json = System.IO.File.ReadAllText("./Fixtures/Templates_TeamTemplate.json");
