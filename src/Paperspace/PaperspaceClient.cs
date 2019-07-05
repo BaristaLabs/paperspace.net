@@ -36,6 +36,7 @@
 
             // Initialize Clients
             Machines = new MachinesClient(connection);
+            Networks = new NetworksClient(connection);
             Scripts = new ScriptsClient(connection);
             Templates = new TemplatesClient(connection);
         }

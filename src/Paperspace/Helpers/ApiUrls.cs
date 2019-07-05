@@ -50,6 +50,12 @@
             return $"/machines/{machineId}/stop".FormatUri();
             
         }
+
+        public static Uri NetworksList()
+        {
+            return $"/networks/getNetworks".FormatUri();
+        }
+
         public static Uri ScriptsCreate()
         {
             return $"/scripts/createScript".FormatUri();

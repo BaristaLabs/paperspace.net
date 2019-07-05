@@ -2,6 +2,7 @@
 {
     using Microsoft.VisualStudio.TestTools.UnitTesting;
     using Newtonsoft.Json;
+    using System.Collections.Generic;
 
     [TestClass]
     public class SerializationTests
@@ -20,6 +21,14 @@
             var json = System.IO.File.ReadAllText("./Fixtures/Machines_FullLifecycle.json");
             var machine = JsonConvert.DeserializeObject<Machine>(json);
             JsonConvert.SerializeObject(machine);
+        }
+
+        [TestMethod]
+        public void Can_Serialize_Network()
+        {
+            var json = System.IO.File.ReadAllText("./Fixtures/Networks_ListNetworks.json");
+            var networks = JsonConvert.DeserializeObject<IList<Network>>(json);
+            JsonConvert.SerializeObject(networks[0]);
         }
 
         [TestMethod]
