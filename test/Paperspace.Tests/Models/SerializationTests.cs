@@ -54,5 +54,13 @@
             var template = JsonConvert.DeserializeObject<Template>(json);
             JsonConvert.SerializeObject(template);
         }
+
+        [TestMethod]
+        public void Can_Serialize_User()
+        {
+            var json = System.IO.File.ReadAllText("./Fixtures/Users_GetUsers.json");
+            var users = JsonConvert.DeserializeObject<IList<User>>(json);
+            JsonConvert.SerializeObject(users[0]);
+        }
     }
 }

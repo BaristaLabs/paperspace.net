@@ -89,7 +89,12 @@
 
         public static Uri TemplatesList()
         {
-            return $"templates/getTemplates".FormatUri();
+            return $"/templates/getTemplates".FormatUri();
+        }
+
+        public static Uri UsersList()
+        {
+            return $"/users/getUsers".FormatUri();
         }
     }
 }
