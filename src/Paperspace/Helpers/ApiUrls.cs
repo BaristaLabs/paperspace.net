@@ -50,6 +50,36 @@
             return $"/machines/{machineId}/stop".FormatUri();
             
         }
+        public static Uri ScriptsCreate()
+        {
+            return $"/scripts/createScript".FormatUri();
+        }
+
+        public static Uri ScriptsDestroy(string scriptId)
+        {
+            Ensure.ArgumentNotNullOrEmptyString(scriptId, nameof(scriptId));
+
+            return $"/scripts/{scriptId}/destroy".FormatUri();
+        }
+
+        public static Uri ScriptsList()
+        {
+            return $"/scripts/getScripts".FormatUri();
+        }
+
+        public static Uri ScriptsShow(string scriptId)
+        {
+            Ensure.ArgumentNotNullOrEmptyString(scriptId, nameof(scriptId));
+
+            return $"/scripts/getScript?scriptId={scriptId}".FormatUri();
+        }
+
+        public static Uri ScriptsText(string scriptId)
+        {
+            Ensure.ArgumentNotNullOrEmptyString(scriptId, nameof(scriptId));
+
+            return $"/scripts/getScriptText?scriptId={scriptId}".FormatUri();
+        }
 
         public static Uri TemplatesList()
         {

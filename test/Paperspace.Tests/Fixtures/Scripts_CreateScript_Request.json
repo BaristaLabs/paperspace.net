@@ -1,0 +1,7 @@
+﻿{
+  "scriptName": "My Script",
+  "scriptText": "echo Hello, World!",
+  "scriptDescription": "A startup script",
+  "isEnabled": true,
+  "runOnce": false
+}
