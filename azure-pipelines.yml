@@ -73,13 +73,11 @@ steps:
     packagesToPack: src/Paperspace/Paperspace.csproj
     includesymbols: true
 
-- task: DotNetCoreCLI@2
-  displayName: 'NuGet Push'
+- task: NuGetCommand@2
   inputs:
     command: push
     nuGetFeedType: external
-    externalEndPoint: 'nuget.org'
-  continueOnError: true
+    publishFeedCredentials: 'nuget.org'
 
 - task: PublishBuildArtifacts@1
   displayName: 'Publish Artifact'
