@@ -7,6 +7,14 @@
     public interface IMachinesClient
     {
         /// <summary>
+        /// Get machine availability for the given region and machine type. Note: availability is only provided for the dedicated GPU machine types. Also, not all machine types are available in all regions.
+        /// </summary>
+        /// <param name="region"></param>
+        /// <param name="type"></param>
+        /// <returns></returns>
+        Task<MachineAvailability> Availability(Region region, MachineType type);
+
+        /// <summary>
         /// Create a new Paperspace virtual machine.
         /// </summary>
         /// <param name="request"></param>
@@ -55,6 +63,21 @@
         /// <param name="machineId">Id of the machine to stop</param>
         /// <returns></returns>
         Task Stop(string machineId);
+
+        /// <summary>
+        /// Update attributes of a machine.
+        /// </summary>
+        /// <param name="request"></param>
+        /// <returns></returns>
+        Task Update(string machineId, UpdateMachineRequest request);
+
+        /// <summary>
+        /// Get machine utilization data for the machine with the given id. Machine upgrades are not represented in utilization data.
+        /// </summary>
+        /// <param name="machineId">Id of the machine to get utilization data for</param>
+        /// <param name="billingMonth">Billing period to query in YYYY-MM format</param>
+        /// <returns></returns>
+        Task<MachineUtilization> Utilization(string machineId, string billingMonth);
 
         /// <summary>
         /// Wait for the machine with the given id to enter a certain machine state.

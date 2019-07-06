@@ -1,5 +1,6 @@
 ﻿namespace Paperspace
 {
+    using Newtonsoft.Json;
     using System;
     using System.Collections.Generic;
     using System.Threading;
@@ -14,6 +15,14 @@
         public MachinesClient(IConnection connection)
             : base(connection)
         {
+        }
+
+        public Task<MachineAvailability> Availability(Region region, MachineType type)
+        {
+            return Connection.Get<MachineAvailability>(ApiUrls.MachinesAvailability(), new Dictionary<string, string> {
+                { "region", JsonConvert.SerializeObject(region) },
+                { "machineType", JsonConvert.SerializeObject(type) }
+            });
         }
 
         public Task<Machine> Create(CreateMachineRequest request)
@@ -49,6 +58,19 @@
         public Task Stop(string machineId)
         {
             return Connection.Post(ApiUrls.MachinesStop(machineId));
+        }
+
+        public Task Update(string machineId, UpdateMachineRequest request)
+        {
+            return Connection.Post(ApiUrls.MachinesUpdate(machineId), null, request);
+        }
+
+        public Task<MachineUtilization> Utilization(string machineId, string billingMonth)
+        {
+            return Connection.Get<MachineUtilization>(ApiUrls.MachinesUtilization(), new Dictionary<string, string> {
+                { "machineId", machineId },
+                { "billingMonth", billingMonth }
+            });
         }
 
         public async Task<Machine> Waitfor(string machineId, MachineState state, int pollIntervalMS = 5000, int maxWaitMS = 0, Action<Machine> pollResultCallback = null)

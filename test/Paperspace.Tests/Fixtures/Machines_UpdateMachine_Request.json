@@ -1,0 +1,10 @@
+﻿{
+  "machineId": "ps123abc",
+  "machineName": "New Machine Name",
+  "shutdownTimeoutInHours": 24,
+  "shutdownTimeoutForces": true,
+  "performAutoSnapshot": true,
+  "autoSnapshotFrequency": "week",
+  "autoSnapshotSaveCount": 4,
+  "dynamicPublicIp": true
+}

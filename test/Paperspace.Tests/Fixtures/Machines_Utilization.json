@@ -1,0 +1,15 @@
+﻿{
+  "machineId": "ps123abc",
+  "utilization": {
+    "machineId": "ps123abc",
+    "secondsUsed": 37351.08562622,
+    "hourlyRate": "0.40",
+    "billingMonth": "2017-08"
+  },
+  "storageUtilization": {
+    "machineId": "ps123abc",
+    "secondsUsed": 678400,
+    "monthlyRate": "7.00",
+    "billingMonth": "2017-08"
+  }
+}

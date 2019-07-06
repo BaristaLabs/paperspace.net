@@ -2,6 +2,7 @@
 {
     using System;
     using System.Collections.Generic;
+    using System.IO;
     using System.Net.Http;
     using System.Threading.Tasks;
 
@@ -42,8 +43,9 @@
         /// <param name="uri">URI of the resource to POST</param>
         /// <param name="parameters">Parameters to add to the request url</param>
         /// <param name="body">Object that describes the new API resource. The value will be serialized to a JSON body.</param>
+        /// <param name="stream">Stream to include as a multipart payload</param>
         /// <returns>The created API resource.</returns>
         /// <exception cref="HttpRequestException">Thrown when an API error occurs.</exception>
-        Task<T> Post<T>(Uri uri, IDictionary<string, string> parameters = null, object body = null);
+        Task<T> Post<T>(Uri uri, IDictionary<string, string> parameters = null, object body = null, Stream stream = null, string fileName = null);
     }
 }
