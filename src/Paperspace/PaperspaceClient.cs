@@ -38,6 +38,7 @@
             Machines = new MachinesClient(connection);
             Networks = new NetworksClient(connection);
             Scripts = new ScriptsClient(connection);
+            ResourceDelegations = new ResourceDelegationsClient(connection);
             Templates = new TemplatesClient(connection);
             Users = new UsersClient(connection);
         }

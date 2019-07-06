@@ -1,7 +1,9 @@
 ﻿namespace Paperspace
 {
     using Newtonsoft.Json.Linq;
+    using System;
     using System.Collections.Generic;
+    using System.IO;
     using System.Threading.Tasks;
 
     public class ScriptsClient : ApiClient, IScriptsClient
@@ -15,9 +17,19 @@
         {
         }
 
-        public Task<Script> Create(CreateScriptRequest request)
+        public Task<Script> Create(CreateScriptRequest request, Stream scriptStream = null)
         {
-            return Connection.Post<Script>(ApiUrls.ScriptsCreate(), null, request);
+            if (string.IsNullOrWhiteSpace(request.ScriptFile) && string.IsNullOrWhiteSpace(request.ScriptText))
+            {
+                throw new ArgumentOutOfRangeException("Missing required parameter: either scriptFile or scriptText");
+            }
+
+            if (!string.IsNullOrWhiteSpace(request.ScriptFile) && !string.IsNullOrWhiteSpace(request.ScriptText))
+            {
+                throw new ArgumentOutOfRangeException("Only one of scriptFile or scriptText allowed");
+            }
+
+            return Connection.Post<Script>(ApiUrls.ScriptsCreate(), null, request, scriptStream, request.ScriptFile);
         }
 
         public Task Destroy(string scriptId)

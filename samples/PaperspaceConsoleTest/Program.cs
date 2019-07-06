@@ -4,6 +4,7 @@
     using System.Collections.Generic;
     using System.IO;
     using System.Linq;
+    using System.Text;
     using System.Threading.Tasks;
     using Microsoft.Extensions.Configuration;
     using Newtonsoft.Json;
@@ -171,7 +172,7 @@
             Console.WriteLine(JsonConvert.SerializeObject(script, Formatting.Indented));
 
             // ----
-            // Get the text of the script we cdreated
+            // Get the text of the script we created
             // ----
             Console.WriteLine($"Showing script text of {newScript.Id}...");
             var text = await client.Scripts.Text(newScript.Id);
@@ -185,6 +186,30 @@
 
             scripts = await client.Scripts.List();
             Console.WriteLine(JsonConvert.SerializeObject(scripts, Formatting.Indented));
+
+            // ----
+            // Create a new Script using a filename
+            // ----
+
+            Console.WriteLine("Creating new script...");
+            using (var ms = new MemoryStream(Encoding.UTF8.GetBytes("echo Foo, Bar, Baz!")))
+            {
+                newScript = await client.Scripts.Create(new CreateScriptRequest
+                {
+                    ScriptName = "My Script",
+                    ScriptFile = "./foobar.ps1",
+                    ScriptDescription = "A startup script",
+                    IsEnabled = true,
+                    RunOnce = false
+                }, ms);
+
+                Console.WriteLine($"Showing script text of {newScript.Id}...");
+                text = await client.Scripts.Text(newScript.Id);
+                Console.WriteLine(text);
+
+                Console.WriteLine($"Destroying {newScript.Id}...");
+                await client.Scripts.Destroy(newScript.Id);
+            }
         }
 
         /// <summary>

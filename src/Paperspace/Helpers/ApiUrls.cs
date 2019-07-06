@@ -4,6 +4,11 @@
 
     public static class ApiUrls
     {
+        public static Uri MachinesAvailability()
+        {
+            return $"/machines/getAvailability".FormatUri();
+        }
+
         public static Uri MachinesCreate()
         {
             return $"/machines/createSingleMachinePublic".FormatUri();
@@ -46,9 +51,19 @@
         {
             Ensure.ArgumentNotNullOrEmptyString(machineId, nameof(machineId));
 
-            // https://api.paperspace.io/machines/stop?access_token=HdckEkqgZLVkBURdYJgbP4XXe8d0cdgqQTmkTuvD03DdakLGMmGAcdobFlFB5ngP
             return $"/machines/{machineId}/stop".FormatUri();
-            
+        }
+
+        public static Uri MachinesUpdate(string machineId)
+        {
+            Ensure.ArgumentNotNullOrEmptyString(machineId, nameof(machineId));
+
+            return $"/machines/{machineId}/updateMachinePublic".FormatUri();
+        }
+
+        public static Uri MachinesUtilization()
+        {
+            return $"/machines/getUtilization".FormatUri();
         }
 
         public static Uri NetworksList()
