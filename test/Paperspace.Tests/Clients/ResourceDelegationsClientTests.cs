@@ -13,7 +13,7 @@
         public async Task ResourceDelegations_Create_Delegation_HappyPath()
         {
             var connection = new Mock<IConnection>();
-            connection.Setup(c => c.Post<IList<ResourceDelegation>>(ApiUrls.ResourceDelegationsCreate(), null, It.IsAny<object>()))
+            connection.Setup(c => c.Post<IList<ResourceDelegation>>(ApiUrls.ResourceDelegationsCreate(), null, It.IsAny<object>(), null, null))
                 .ReturnsAsync(() =>
                 {
                     var json = System.IO.File.ReadAllText("./Fixtures/ResourceDelegations_CreateDelegation.json");

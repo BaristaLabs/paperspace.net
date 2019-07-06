@@ -12,6 +12,24 @@
     [TestClass]
     public class MachinesClientTests
     {
+
+        [TestMethod]
+        public async Task MachinesClient_Availability_HappyPath()
+        {
+            var connection = new Mock<IConnection>();
+            connection.Setup(c => c.Get<MachineAvailability>(ApiUrls.MachinesAvailability(), It.IsAny<Dictionary<string, string>>()))
+                .ReturnsAsync(() =>
+                {
+                    var json = System.IO.File.ReadAllText("./Fixtures/Machines_Availability.json");
+                    return JsonConvert.DeserializeObject<MachineAvailability>(json);
+                });
+
+            var machinesClient = new MachinesClient(connection.Object);
+            var result = await machinesClient.Availability(Region.EastCoast_NY2, MachineType.Air);
+
+            Assert.AreEqual(true, result.Available);
+        }
+
         [TestMethod]
         public async Task MachinesClient_List_HappyPath()
         {
@@ -26,7 +44,7 @@
             var machinesClient = new MachinesClient(connection.Object);
             var result = await machinesClient.List();
 
-            Assert.AreEqual(result.Count, 1);
+            Assert.AreEqual(1, result.Count);
         }
 
         [TestMethod]
@@ -43,7 +61,7 @@
             var machinesClient = new MachinesClient(connection.Object);
             var result = await machinesClient.Show("pslwpsvsx");
 
-            Assert.AreEqual(result.Id, "pslwpsvsx");
+            Assert.AreEqual("pslwpsvsx", result.Id);
         }
 
         [TestMethod]
@@ -60,7 +78,7 @@
             var machinesClient = new MachinesClient(connection.Object);
             var result = await machinesClient.Show("psxs9sp8u");
 
-            Assert.AreEqual(result.Id, "psxs9sp8u");
+            Assert.AreEqual("psxs9sp8u", result.Id);
             Assert.AreEqual(7, result.Events.Count);
         }
 
@@ -68,7 +86,7 @@
         public async Task MachinesClient_Create_HappyPath()
         {
             var connection = new Mock<IConnection>();
-            connection.Setup(c => c.Post<Machine>(ApiUrls.MachinesCreate(), null, It.IsAny<CreateMachineRequest>()))
+            connection.Setup(c => c.Post<Machine>(ApiUrls.MachinesCreate(), null, It.IsAny<CreateMachineRequest>(), null, null))
                 .ReturnsAsync(() =>
                 {
                     var json = System.IO.File.ReadAllText("./Fixtures/Machines_CreateMachine.json");
@@ -138,6 +156,47 @@
 
             var machinesClient = new MachinesClient(connection.Object);
             await machinesClient.Destroy("pslwpsvsx", false);
+        }
+
+        [TestMethod]
+        public async Task MachinesClient_Update_HappyPath()
+        {
+            var connection = new Mock<IConnection>();
+            connection.Setup(c => c.Post(ApiUrls.MachinesUpdate("psxs9sp8u"), It.IsAny<Dictionary<string, string>>(), It.IsAny<object>()))
+                .Returns(() =>
+                {
+                    return Task.CompletedTask;
+                });
+
+            var machinesClient = new MachinesClient(connection.Object);
+            await machinesClient.Update("psxs9sp8u", new UpdateMachineRequest()
+            {
+                MachineName = "foo, bar"
+            });
+
+            connection.Verify(
+                c => c.Post(ApiUrls.MachinesUpdate("psxs9sp8u"), It.IsAny<Dictionary<string, string>>(), It.IsAny<object>()),
+                Times.Exactly(1)
+                );
+        }
+
+        [TestMethod]
+        public async Task MachinesClient_Utilization_HappyPath()
+        {
+            var connection = new Mock<IConnection>();
+            connection.Setup(c => c.Get<MachineUtilization>(ApiUrls.MachinesUtilization(), It.IsAny<Dictionary<string, string>>()))
+                .ReturnsAsync(() =>
+                {
+                    var json = System.IO.File.ReadAllText("./Fixtures/Machines_Utilization.json");
+                    return JsonConvert.DeserializeObject<MachineUtilization>(json);
+                });
+
+            var machinesClient = new MachinesClient(connection.Object);
+            var result = await machinesClient.Utilization("psxs9sp8u", "2019-02");
+
+            Assert.AreEqual("ps123abc", result.MachineId);
+            Assert.IsNotNull(result.Utilization);
+            Assert.IsNotNull(result.StorageUtilization);
         }
 
         [TestMethod]

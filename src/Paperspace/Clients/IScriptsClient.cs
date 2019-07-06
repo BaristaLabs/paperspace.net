@@ -1,6 +1,7 @@
 ﻿namespace Paperspace
 {
     using System.Collections.Generic;
+    using System.IO;
     using System.Threading.Tasks;
 
     /// <summary>
@@ -15,7 +16,7 @@
         /// For Linux machines the script should be a bash script. For Windows machines the script should be a powershell script. See the samples directory for sample startup scripts for Windows. Note: script data is limited to 16KB per script. See the Script Guide for more info on using scripts.
         /// </remarks>
         /// <returns></returns>
-        Task<Script> Create(CreateScriptRequest request);
+        Task<Script> Create(CreateScriptRequest request, Stream scriptStream = null);
 
         /// <summary>
         /// Destroys the starup script with the given id. When this action is performed, the script is immediately disassociated from any machines it is assigned to as well.

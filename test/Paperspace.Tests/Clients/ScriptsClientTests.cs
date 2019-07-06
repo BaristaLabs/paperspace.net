@@ -14,7 +14,7 @@
         public async Task ScriptsClient_Create_HappyPath()
         {
             var connection = new Mock<IConnection>();
-            connection.Setup(c => c.Post<Script>(ApiUrls.ScriptsCreate(), null, It.IsAny<object>()))
+            connection.Setup(c => c.Post<Script>(ApiUrls.ScriptsCreate(), null, It.IsAny<object>(), null, "test123"))
                 .ReturnsAsync(() =>
                 {
                     var json = System.IO.File.ReadAllText("./Fixtures/Scripts_GetScript.json");
@@ -33,10 +33,59 @@
         }
 
         [TestMethod]
+        public async Task ScriptsClient_Create_Throws_On_Invalid_Args()
+        {
+            var connection = new Mock<IConnection>();
+            connection.Setup(c => c.Post<Script>(ApiUrls.ScriptsCreate(), null, It.IsAny<object>(), null, "test123"))
+                .ReturnsAsync(() =>
+                {
+                    var json = System.IO.File.ReadAllText("./Fixtures/Scripts_GetScript.json");
+                    return JsonConvert.DeserializeObject<Script>(json);
+                });
+
+            var scriptsClient = new ScriptsClient(connection.Object);
+            await Assert.ThrowsExceptionAsync<ArgumentOutOfRangeException>(async () => {
+                await scriptsClient.Create(new CreateScriptRequest()
+                {
+                    ScriptName = "foo",
+                    MachineId = "test12345",
+                    ScriptFile = "test123",
+                    ScriptText = "asdf"
+                });
+            });
+
+            await Assert.ThrowsExceptionAsync<ArgumentOutOfRangeException>(async () => {
+                await scriptsClient.Create(new CreateScriptRequest()
+                {
+                    ScriptName = "foo",
+                    MachineId = "test12345",
+                    ScriptFile = null,
+                    ScriptText = null
+                });
+            });
+
+            await scriptsClient.Create(new CreateScriptRequest()
+            {
+                ScriptName = "foo",
+                MachineId = "test12345",
+                ScriptFile = "test123",
+                ScriptText = null
+            });
+
+            await scriptsClient.Create(new CreateScriptRequest()
+            {
+                ScriptName = "foo",
+                MachineId = "test12345",
+                ScriptFile = null,
+                ScriptText = "test123"
+            });
+        }
+
+        [TestMethod]
         public async Task ScriptsClient_Destroy_HappyPath()
         {
             var connection = new Mock<IConnection>();
-            connection.Setup(c => c.Post<Script>(ApiUrls.ScriptsDestroy("test1234"), null, It.IsAny<object>()))
+            connection.Setup(c => c.Post<Script>(ApiUrls.ScriptsDestroy("test1234"), null, It.IsAny<object>(), null, null))
                 .ReturnsAsync(() =>
                 {
                     return null;

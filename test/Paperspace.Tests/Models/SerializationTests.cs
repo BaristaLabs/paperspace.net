@@ -16,11 +16,35 @@
         }
 
         [TestMethod]
+        public void Can_Serialize_UpdateMachineRequest()
+        {
+            var json = System.IO.File.ReadAllText("./Fixtures/Machines_UpdateMachine_Request.json");
+            var updateMachineRequest = JsonConvert.DeserializeObject<UpdateMachineRequest>(json);
+            JsonConvert.SerializeObject(updateMachineRequest);
+        }
+
+        [TestMethod]
         public void Can_Serialize_Machine()
         {
             var json = System.IO.File.ReadAllText("./Fixtures/Machines_FullLifecycle.json");
             var machine = JsonConvert.DeserializeObject<Machine>(json);
             JsonConvert.SerializeObject(machine);
+        }
+
+        [TestMethod]
+        public void Can_Serialize_Machine_Availability()
+        {
+            var json = System.IO.File.ReadAllText("./Fixtures/Machines_Availability.json");
+            var machineAvailability = JsonConvert.DeserializeObject<MachineAvailability>(json);
+            JsonConvert.SerializeObject(machineAvailability);
+        }
+
+        [TestMethod]
+        public void Can_Serialize_Machine_Utilization()
+        {
+            var json = System.IO.File.ReadAllText("./Fixtures/Machines_Utilization.json");
+            var machineUtilization = JsonConvert.DeserializeObject<MachineUtilization>(json);
+            JsonConvert.SerializeObject(machineUtilization);
         }
 
         [TestMethod]
