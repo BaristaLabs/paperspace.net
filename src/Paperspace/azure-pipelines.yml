@@ -33,7 +33,7 @@ steps:
 
 - script: |
     dotnet tool install nbgv --tool-path tools
-    Set-Location "./src/Paperspace"
+    cd ./src/Paperspace
     ./tools/nbgv cloud
   displayName: Use NBGV to set Assembly and NuGet Version
 
