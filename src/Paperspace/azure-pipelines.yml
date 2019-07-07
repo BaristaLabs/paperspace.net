@@ -1,0 +1,86 @@
+pool:
+  name: Hosted Ubuntu 1604
+  
+trigger:
+  branches:
+    include:
+      - master
+  paths:
+    include:
+      - src/Paperspace/*
+
+pr:
+  branches:
+    include:
+      - master
+      - releases/*
+    exclude:
+      - releases/old*
+  paths:
+    include:
+      - src/Paperspace/*
+steps:
+- task: DotNetCoreCLI@2
+  displayName: Restore
+  inputs:
+    command: restore
+    projects: '**/*.csproj'
+
+- task: DotNetCoreCLI@2
+  displayName: Build
+  inputs:
+    projects: '**/*.csproj'
+    arguments: '--no-restore --configuration Release'
+
+- task: DotNetCoreCLI@2
+  displayName: Test
+  inputs:
+    command: test
+    projects: 'test/**/*.csproj'
+    arguments: '--no-restore --configuration Release /p:CollectCoverage=true /p:CoverletOutputFormat=cobertura'
+
+- task: Palmmedia.reportgenerator.reportgenerator-build-release-task.reportgenerator@4
+  displayName: Create code coverage report
+  inputs:
+    reports: 'test/**/coverage.cobertura.xml'
+    targetdir: CodeCoverage
+    reporttypes: 'HtmlInline_AzurePipelines;Cobertura;Xml'
+
+  # Report code coverage to coveralls.io
+- script: |
+    dotnet tool install coveralls.net --version 1.0.0 --tool-path tools
+    ./tools/csmacnz.Coveralls --reportgenerator -i "CodeCoverage/" --repoToken $(COVERALLS_REPO_TOKEN) --commitId "$(Build.SourceVersion)" --commitBranch "$(Build.SourceBranchName)" --commitAuthor "$(Build.RequestedFor)" --commitEmail "$(Build.RequestedForEmail)" --commitMessage "$(Build.SourceVersionMessage)" --jobId "$(Build.BuildId)" --useRelativePaths
+  displayName: Publish code coverage report to coveralls
+
+  # Publish the code coverage result (summary and web site)
+  # The summary allows to view the coverage percentage in the summary tab
+  # The web site allows to view which lines are covered directly in Azure Pipeline
+- task: PublishCodeCoverageResults@1
+  displayName: 'Publish code coverage'
+  inputs:
+    codeCoverageTool: Cobertura
+    summaryFileLocation: 'CodeCoverage/Cobertura.xml'
+    reportDirectory: 'CodeCoverage'
+
+- task: DotNetCoreCLI@2
+  displayName: Pack NuGet Package
+  condition: and(succeeded(), eq(variables['Build.SourceBranch'], 'refs/heads/master'))
+  inputs:
+    command: pack
+    packagesToPack: src/Paperspace/Paperspace.csproj
+    includesymbols: true
+
+- task: NuGetCommand@2
+  displayName: Push to NuGet
+  condition: and(succeeded(), eq(variables['Build.SourceBranch'], 'refs/heads/master'))
+  inputs:
+    command: push
+    nuGetFeedType: external
+    publishFeedCredentials: 'nuget.org'
+    continueOnError: true
+
+- task: PublishBuildArtifacts@1
+  displayName: 'Publish Artifact'
+  inputs:
+    PathtoPublish: '$(build.artifactstagingdirectory)'
+  condition: succeededOrFailed()
