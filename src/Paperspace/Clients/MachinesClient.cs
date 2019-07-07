@@ -19,10 +19,14 @@
 
         public Task<MachineAvailability> Availability(Region region, MachineType type)
         {
-            return Connection.Get<MachineAvailability>(ApiUrls.MachinesAvailability(), new Dictionary<string, string> {
-                { "region", JsonConvert.SerializeObject(region) },
-                { "machineType", JsonConvert.SerializeObject(type) }
-            });
+            var anonParameters = new
+            {
+                region,
+                machineType = type
+            };
+
+            var parameters = anonParameters.ToQueryStringDictionary();
+            return Connection.Get<MachineAvailability>(ApiUrls.MachinesAvailability(), parameters);
         }
 
         public Task<Machine> Create(CreateMachineRequest request)

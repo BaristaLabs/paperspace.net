@@ -99,7 +99,7 @@
         public void Can_Serialize_CreateResourceDelegation()
         {
             var json = System.IO.File.ReadAllText("./Fixtures/ResourceDelegations_CreateDelegation.json");
-            var resourceDelegations = JsonConvert.DeserializeObject<IList<ResourceDelegation>>(json);
+            var resourceDelegations = JsonConvert.DeserializeObject<ResourceDelegation>(json);
             JsonConvert.SerializeObject(resourceDelegations);
         }
 

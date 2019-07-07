@@ -33,6 +33,8 @@
             await NetworksSample(client);
             await UsersSample(client);
 
+            await JobsSample(client);
+
             Console.WriteLine("All done!!");
         }
 
@@ -138,6 +140,9 @@
             Console.WriteLine($"Restarting {machine.Id}...");
             await client.Machines.Restart(machine.Id);
             machines = await client.Machines.List();
+            // Note: Restart events are added immediately, but the machine state still reports a state of 'Ready'
+            // either wait for the Restart event to be in progress, or wait awhile.
+            await Task.Delay(15000);
             machine = await client.Machines.Waitfor(machine.Id, MachineState.Ready, 5000, 0, (m) => Console.WriteLine(m.State));
 
             Console.WriteLine($"Machine with the id of {machine.Id} is now {machine.State}");
@@ -146,7 +151,7 @@
             // Get machine utilization.
             // ----
             var currentDate = DateTime.Now;
-            var utilization = await client.Machines.Utilization(machine.Id, currentDate.ToString("YYYY-MM"));
+            var utilization = await client.Machines.Utilization(machine.Id, currentDate.ToString("yyyy-MM"));
             Console.WriteLine(JsonConvert.SerializeObject(utilization, Formatting.Indented));
         }
 

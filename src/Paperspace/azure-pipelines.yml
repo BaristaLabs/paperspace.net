@@ -35,7 +35,7 @@ steps:
     dotnet tool install nbgv --tool-path tools
     cd $(Build.SourcesDirectory)/src/Paperspace
     $(Build.SourcesDirectory)/tools/nbgv cloud
-  displayName: Use NBGV to set Assembly and NuGet Version
+  displayName: Use NBGV to set build number from version+git
 
 - task: DotNetCoreCLI@2
   displayName: Build

@@ -165,7 +165,7 @@
         /// Optional state value to match on
         /// </summary>
         [JsonProperty("state")]
-        public MachineState State
+        public MachineState? State
         {
             get;
             set;
@@ -215,7 +215,7 @@
         /// Optional region to match on
         /// </summary>
         [JsonProperty("region")]
-        public Region Region
+        public Region? Region
         {
             get;
             set;

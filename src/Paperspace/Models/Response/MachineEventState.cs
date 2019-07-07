@@ -27,5 +27,11 @@
         /// </summary>
         [EnumMember(Value = "done")]
         Done,
+
+        /// <summary>
+        /// The Machine Event was unable to run to normal completion
+        /// </summary>
+        [EnumMember(Value = "error")]
+        Error,
     }
 }

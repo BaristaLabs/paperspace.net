@@ -27,15 +27,13 @@
             var client = new PaperspaceClient(connectionMock.Object, logsConnectionMock.Object);
             Assert.ReferenceEquals(connectionMock, client.Connection);
             Assert.ReferenceEquals(logsConnectionMock, client.LogsConnection);
+            Assert.IsNotNull(client.Jobs);
             Assert.IsNotNull(client.Machines);
             Assert.IsNotNull(client.Networks);
             Assert.IsNotNull(client.Scripts);
             Assert.IsNotNull(client.ResourceDelegations);
             Assert.IsNotNull(client.Templates);
             Assert.IsNotNull(client.Users);
-
-            // Not Implemented Yet:
-            Assert.IsNull(client.Jobs);
         }
     }
 }

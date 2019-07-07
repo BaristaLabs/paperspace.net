@@ -13,11 +13,11 @@
         public async Task ResourceDelegations_Create_Delegation_HappyPath()
         {
             var connection = new Mock<IConnection>();
-            connection.Setup(c => c.Post<IList<ResourceDelegation>>(ApiUrls.ResourceDelegationsCreate(), null, It.IsAny<object>(), null, null))
+            connection.Setup(c => c.Post<ResourceDelegation>(ApiUrls.ResourceDelegationsCreate(), null, It.IsAny<object>(), null, null))
                 .ReturnsAsync(() =>
                 {
                     var json = System.IO.File.ReadAllText("./Fixtures/ResourceDelegations_CreateDelegation.json");
-                    return JsonConvert.DeserializeObject<IList<ResourceDelegation>>(json);
+                    return JsonConvert.DeserializeObject<ResourceDelegation>(json);
                 });
 
             var rdClient = new ResourceDelegationsClient(connection.Object);
@@ -29,7 +29,7 @@
                 }
             });
 
-            Assert.AreEqual(1, result.Count);
+            Assert.IsNotNull(result);
         }
     }
 }

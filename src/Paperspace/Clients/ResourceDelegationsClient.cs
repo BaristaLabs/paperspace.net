@@ -14,9 +14,9 @@
         {
         }
 
-        public Task<IList<ResourceDelegation>> Create(CreateResourceDelegationRequest request)
+        public Task<ResourceDelegation> Create(CreateResourceDelegationRequest request)
         {
-            return Connection.Post<IList<ResourceDelegation>>(ApiUrls.ResourceDelegationsCreate(), null, request);
+            return Connection.Post<ResourceDelegation>(ApiUrls.ResourceDelegationsCreate(), null, request);
         }
     }
 }
