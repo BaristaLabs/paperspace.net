@@ -24,19 +24,21 @@ steps:
   displayName: Restore
   inputs:
     command: restore
-    projects: '**/*.csproj'
+    projects: |
+    'src/Paperspace/Paperspace.csproj'
+    'test/Paperspace.Tests/Paperspace.Tests.csproj'
 
 - task: DotNetCoreCLI@2
   displayName: Build
   inputs:
-    projects: '**/*.csproj'
+    projects: 'src/Paperspace/Paperspace.csproj'
     arguments: '--no-restore --configuration Release'
 
 - task: DotNetCoreCLI@2
   displayName: Test
   inputs:
     command: test
-    projects: 'test/**/*.csproj'
+    projects: 'test/Paperspace.Tests/Paperspace.Tests.csproj'
     arguments: '--no-restore --configuration Release /p:CollectCoverage=true /p:CoverletOutputFormat=cobertura'
 
 - task: Palmmedia.reportgenerator.reportgenerator-build-release-task.reportgenerator@4
