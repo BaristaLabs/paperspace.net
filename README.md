@@ -38,7 +38,7 @@ var newMachine = await client.Machines.Create(new CreateMachineRequest
     BillingType = BillingType.Hourly,
     MachineName = "My Machine 1",
     TemplateId = w10template.Id,
-	ScriptId: "s12345"
+    ScriptId: "s12345"
 });
 ```
 
