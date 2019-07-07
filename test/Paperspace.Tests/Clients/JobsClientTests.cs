@@ -35,7 +35,7 @@
             var jobsClient = new JobsClient(connection.Object, logsConnection.Object);
             var result = await jobsClient.ArtifactsList("j123abc");
 
-            Assert.AreEqual(result.Count, 2);
+            Assert.AreEqual(2, result.Count);
         }
 
         [TestMethod]
@@ -57,7 +57,7 @@
                 Links = true,
             });
 
-            Assert.AreEqual(result.Count, 2);
+            Assert.AreEqual(2, result.Count);
         }
 
         [TestMethod]

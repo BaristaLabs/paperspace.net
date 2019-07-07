@@ -35,7 +35,7 @@
         /// List information about all machines available to either the current authenticated user or the team, if the user belongs to a team. The list method takes an optional first argument to limit the returned machine objects.
         /// </summary>
         /// <returns>A collection of Machines</returns>
-        Task<IList<Machine>> List();
+        Task<IList<Machine>> List(MachineFilter filter = null);
 
         /// <summary>
         /// Restart an individual machine. If the machine is already restarting, this action will request the machine be restarted again. This action can only be performed by the user who owns the machine.

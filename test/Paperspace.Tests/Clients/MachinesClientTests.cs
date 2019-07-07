@@ -48,6 +48,50 @@
         }
 
         [TestMethod]
+        public async Task MachinesClient_List_With_Filter()
+        {
+            var connection = new Mock<IConnection>();
+            connection.Setup(c => c.Get<IList<Machine>>(ApiUrls.MachinesList(), It.IsAny<IDictionary<string, string>>()))
+                .ReturnsAsync(() =>
+                {
+                    var json = System.IO.File.ReadAllText("./Fixtures/Machines_ListMachines.json");
+                    return JsonConvert.DeserializeObject<IList<Machine>>(json);
+                });
+
+            var machinesClient = new MachinesClient(connection.Object);
+            var result = await machinesClient.List(new MachineFilter()
+            {
+                AgentType = "asdf",
+                AutoSnapshotFrequency = "asdf",
+                AutoSnapshotSaveCount = 5,
+                Cpus = 1,
+                DTCreated = DateTime.Now,
+                DTLastRun = DateTime.Now,
+                Gpu = "huh",
+                MachineId = "asdf",
+                Name = "asdf",
+                NetworkId = "asdf",
+                OS = "asdf",
+                PerformAutoSnapshot = true,
+                PrivateIpAddress = "asdf",
+                PublicIpAddress = "asdf",
+                Ram = "asdf",
+                Region = Region.EastCoast_NY2,
+                ScriptId = "asdf",
+                ShutdownTimeoutInHours = 24,
+                State = MachineState.Ready,
+                StorageTotal = "asdf",
+                StorageUsed = "asdf",
+                TeamId = "asdf",
+                UpdatesPending = true,
+                UsageRate = "asdf",
+                UserId = "asdf",
+            });
+
+            Assert.AreEqual(1, result.Count);
+        }
+
+        [TestMethod]
         public async Task MachinesClient_Show_HappyPath()
         {
             var connection = new Mock<IConnection>();

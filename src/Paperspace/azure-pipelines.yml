@@ -48,7 +48,7 @@ steps:
   inputs:
     command: test
     projects: 'test/Paperspace.Tests/Paperspace.Tests.csproj'
-    arguments: '--no-restore --configuration $(BuildConfiguration) /p:CollectCoverage=true /p:CoverletOutputFormat=cobertura'
+    arguments: '--no-restore --configuration $(BuildConfiguration) --settings CodeCoverage.runsettings /p:CollectCoverage=true /p:CoverletOutputFormat=cobertura'
 
 - task: Palmmedia.reportgenerator.reportgenerator-build-release-task.reportgenerator@4
   displayName: Create code coverage report

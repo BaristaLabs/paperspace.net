@@ -48,7 +48,7 @@
 
             // ASSERT
             Assert.IsNotNull(result);
-            Assert.AreEqual(result.Id, 1);
+            Assert.AreEqual(1, result.Id);
 
             // also check the 'http' call was like we expected it
             var expectedUri = new Uri("https://api.paperspace.io/api/test/whatever");
@@ -150,7 +150,7 @@
 
             // ASSERT
             Assert.IsNotNull(result);
-            Assert.AreEqual(result.Id, 1);
+            Assert.AreEqual(1, result.Id);
 
             // also check the 'http' call was like we expected it - joining query params both in the initial url and in the query dictionary.
             var expectedUri = new Uri("https://api.paperspace.io/api/test/whatever?baz=buz&foo=bar");
@@ -211,7 +211,7 @@
 
                 // ASSERT
                 Assert.IsNotNull(result);
-                Assert.AreEqual(result.Id, 1);
+                Assert.AreEqual(1, result.Id);
 
                 // also check the 'http' call was like we expected it
                 var expectedUri = new Uri("https://api.paperspace.io/api/test/whatever?foo=bar&Id=1234&Value=foo");
@@ -235,7 +235,7 @@
 
                 // ASSERT
                 Assert.IsNotNull(result);
-                Assert.AreEqual(result.Id, 1);
+                Assert.AreEqual(1, result.Id);
 
                 // also check the 'http' call was like we expected it
                 var expectedUri = new Uri("https://api.paperspace.io/api/test/whatever?foo=bar&Id=1234&Value=foo");

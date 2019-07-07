@@ -29,7 +29,7 @@
                 }
             });
 
-            Assert.AreEqual(result.Count, 1);
+            Assert.AreEqual(1, result.Count);
         }
     }
 }
