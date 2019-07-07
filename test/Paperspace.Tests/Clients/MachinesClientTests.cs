@@ -278,16 +278,5 @@
                 await machinesClient.Waitfor("psxs9sp8u", MachineState.Restarting);
             });
         }
-
-        [TestMethod]
-        public async Task MachinesClient_WaitFor_Callback_Not_Needed()
-        {
-            var connection = new Mock<IConnection>();
-            var machinesClient = new MachinesClient(connection.Object);
-            await Assert.ThrowsExceptionAsync<ArgumentOutOfRangeException>(async () =>
-            {
-                await machinesClient.Waitfor("psxs9sp8u", MachineState.Restarting);
-            });
-        }
     }
 }

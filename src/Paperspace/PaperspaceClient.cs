@@ -13,6 +13,11 @@
         public static readonly Uri PaperspaceApiUrl = new Uri("https://api.paperspace.io/");
 
         /// <summary>
+        /// The Base address for the Paperspace Logs API
+        /// </summary>
+        public static readonly Uri PaperspaceLogApiUrl = new Uri("https://logs.paperspace.io/");
+
+        /// <summary>
         /// Create a new instance of the Paperspace APIclient pointing to
         /// https://api.paperspace.io/
         /// </summary>
@@ -20,7 +25,7 @@
         /// The API key created from within the API section of the Paperspace console. 
         /// </param>
         public PaperspaceClient(string apiKey)
-            : this(new Connection(apiKey))
+            : this(new Connection(apiKey, PaperspaceApiUrl, new System.Net.Http.HttpClient()), new Connection(apiKey, PaperspaceLogApiUrl, new System.Net.Http.HttpClient()))
         {
         }
 
@@ -28,11 +33,13 @@
         /// Create a new instance of the Paperspace client using the specified connection.
         /// </summary>
         /// <param name="connection">The underlying <seealso cref="IConnection"/> used to make requests</param>
-        public PaperspaceClient(IConnection connection)
+        public PaperspaceClient(IConnection connection, IConnection logsConnection)
         {
             Ensure.ArgumentNotNull(connection, nameof(connection));
+            Ensure.ArgumentNotNull(logsConnection, nameof(logsConnection));
 
             Connection = connection;
+            LogsConnection = logsConnection;
 
             // Initialize Clients
             Machines = new MachinesClient(connection);
@@ -47,6 +54,11 @@
         /// Gets the client connection used to make REST requests to Paperspace endpoints.
         /// </summary>C:\Projects\paperspace.net\src\Paperspace\PaperspaceClient.cs
         public IConnection Connection { get; }
+
+        /// <summary>
+        /// Gets the client connection used to make REST requests to Paperspace Logs endpoints.
+        /// </summary>C:\Projects\paperspace.net\src\Paperspace\PaperspaceClient.cs
+        public IConnection LogsConnection { get; }
 
         /// <summary>
         /// Access Paperspace's Jobs API.

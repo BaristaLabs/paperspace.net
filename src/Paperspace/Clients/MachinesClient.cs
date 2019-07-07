@@ -67,6 +67,10 @@
 
         public Task<MachineUtilization> Utilization(string machineId, string billingMonth)
         {
+            Ensure.ArgumentNotNullOrEmptyString(machineId, nameof(machineId));
+
+            Ensure.ArgumentNotNullOrEmptyString(billingMonth, nameof(billingMonth));
+
             return Connection.Get<MachineUtilization>(ApiUrls.MachinesUtilization(), new Dictionary<string, string> {
                 { "machineId", machineId },
                 { "billingMonth", billingMonth }

@@ -43,20 +43,9 @@
             {
                 return Connection.Get<IList<Script>>(ApiUrls.ScriptsList());
             }
-            else
-            {
-                var parameters = new Dictionary<string, string>();
-                var jObj = JObject.FromObject(filter);
-                foreach (var property in jObj)
-                {
-                    if (property.Value != null)
-                    {
-                        parameters.Add(property.Key, property.Value.ToString());
-                    }
-                }
 
-                return Connection.Get<IList<Script>>(ApiUrls.ScriptsList(), parameters);
-            }
+            var parameters = filter.ToQueryStringDictionary();
+            return Connection.Get<IList<Script>>(ApiUrls.ScriptsList(), parameters);
         }
 
         public Task<Script> Show(string scriptId)

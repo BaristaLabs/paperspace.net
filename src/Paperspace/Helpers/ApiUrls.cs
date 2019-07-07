@@ -4,6 +4,78 @@
 
     public static class ApiUrls
     {
+
+        public static Uri JobsArtifactsDestroy(string jobId)
+        {
+            Ensure.ArgumentNotNullOrEmptyString(jobId, nameof(jobId));
+
+            return $"/jobs/{jobId}/artifactsDestroy".FormatUri();
+        }
+
+        public static Uri JobsArtifactsGet(string jobId)
+        {
+            Ensure.ArgumentNotNullOrEmptyString(jobId, nameof(jobId));
+
+            return $"/jobs/artifactsGet?jobId={jobId}".FormatUri();
+        }
+
+        public static Uri JobsArtifactsList(string jobId)
+        {
+            Ensure.ArgumentNotNullOrEmptyString(jobId, nameof(jobId));
+
+            return $"/jobs/artifactsList?jobId={jobId}".FormatUri();
+        }
+
+        public static Uri JobsClone(string jobId)
+        {
+            Ensure.ArgumentNotNullOrEmptyString(jobId, nameof(jobId));
+
+            return $"/jobs/{jobId}/clone".FormatUri();
+        }
+
+        public static Uri JobsCreate()
+        {
+            return $"/jobs/createJob".FormatUri();
+        }
+
+        public static Uri JobsDestroy(string jobId)
+        {
+            Ensure.ArgumentNotNullOrEmptyString(jobId, nameof(jobId));
+
+            return $"/jobs/{jobId}/destroy".FormatUri();
+        }
+
+        public static Uri JobsList()
+        {
+            return $"/jobs/getJobs".FormatUri();
+        }
+
+        public static Uri JobsLogs(string jobId)
+        {
+            Ensure.ArgumentNotNullOrEmptyString(jobId, nameof(jobId));
+
+            return $"/jobs/logs?jobId={jobId}".FormatUri();
+        }
+
+        public static Uri JobsMachineTypes()
+        {
+            return $"/jobs/getClusterAvailableMachineTypes".FormatUri();
+        }
+
+        public static Uri JobsShow(string jobId)
+        {
+            Ensure.ArgumentNotNullOrEmptyString(jobId, nameof(jobId));
+
+            return $"/jobs/getJob?jobId={jobId}".FormatUri();
+        }
+
+        public static Uri JobsStop(string jobId)
+        {
+            Ensure.ArgumentNotNullOrEmptyString(jobId, nameof(jobId));
+
+            return $"/jobs/{jobId}/stop".FormatUri();
+        }
+
         public static Uri MachinesAvailability()
         {
             return $"/machines/getAvailability".FormatUri();
