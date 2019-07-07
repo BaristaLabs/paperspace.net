@@ -1,5 +1,5 @@
 variables:
-  configuration: Release
+  BuildConfiguration: Release
   
 pool:
   name: Hosted Ubuntu 1604
@@ -35,14 +35,14 @@ steps:
   displayName: Build
   inputs:
     projects: 'src/Paperspace.PowerShell/Paperspace.PowerShell.csproj'
-    arguments: '--no-restore --configuration $(configuration)'
+    arguments: '--no-restore --configuration $(BuildConfiguration)'
 
 - task: DotNetCoreCLI@2
   displayName: Test
   inputs:
     command: test
     projects: 'test/Paperspace.PowerShell.Tests/Paperspace.PowerShell.Tests.csproj'
-    arguments: '--no-restore --configuration $(configuration) /p:CollectCoverage=true /p:CoverletOutputFormat=cobertura'
+    arguments: '--no-restore --configuration $(BuildConfiguration) /p:CollectCoverage=true /p:CoverletOutputFormat=cobertura'
 
 - task: Palmmedia.reportgenerator.reportgenerator-build-release-task.reportgenerator@4
   displayName: Create code coverage report
