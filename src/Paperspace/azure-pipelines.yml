@@ -32,8 +32,8 @@ steps:
       test/Paperspace.Tests/Paperspace.Tests.csproj
 
 - script: |
-    dotnet tool install nbgv --tool-path tools
-    ./tools/nbgv cloud
+    dotnet tool install nbgv --tool-path src/Paperspace/tools
+    ./src/Paperspace/tools/nbgv cloud
   displayName: Use NBGV to set Assembly and NuGet Version
 
 - task: DotNetCoreCLI@2
