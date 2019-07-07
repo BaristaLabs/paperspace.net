@@ -32,8 +32,8 @@ steps:
       test/Paperspace.Tests/Paperspace.Tests.csproj
 
 - script: |
-    dotnet tool install nbgv --tool-path src/Paperspace/tools
-    ./src/Paperspace/tools/nbgv cloud
+    dotnet tool install nbgv --tool-path src/Paperspace
+    ./src/Paperspace/nbgv cloud
   displayName: Use NBGV to set Assembly and NuGet Version
 
 - task: DotNetCoreCLI@2
@@ -74,12 +74,10 @@ steps:
 
 - task: DotNetCoreCLI@2
   displayName: Pack NuGet Package
-  condition: and(succeeded(), eq(variables['Build.SourceBranch'], 'refs/heads/master'))
   inputs:
     command: pack
     packagesToPack: src/Paperspace/Paperspace.csproj
     includesymbols: true
-    outputDir: '$(Build.ArtifactStagingDirectory)'
 
 - task: NuGetCommand@2
   displayName: Push to NuGet
