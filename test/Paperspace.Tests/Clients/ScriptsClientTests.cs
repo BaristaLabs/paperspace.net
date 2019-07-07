@@ -109,7 +109,7 @@
             var scriptsClient = new ScriptsClient(connection.Object);
             var result = await scriptsClient.List();
 
-            Assert.AreEqual(result.Count, 1);
+            Assert.AreEqual(1, result.Count);
         }
 
         [TestMethod]
@@ -136,7 +136,7 @@
                 RunOnce = true
             });
 
-            Assert.AreEqual(result.Count, 1);
+            Assert.AreEqual(1, result.Count);
         }
 
 

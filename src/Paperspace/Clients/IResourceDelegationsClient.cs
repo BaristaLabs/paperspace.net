@@ -10,6 +10,6 @@
         /// </summary>
         /// <param name="request"></param>
         /// <returns></returns>
-        Task<IList<ResourceDelegation>> Create(CreateResourceDelegationRequest request);
+        Task<ResourceDelegation> Create(CreateResourceDelegationRequest request);
     }
 }

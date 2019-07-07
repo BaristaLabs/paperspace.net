@@ -1,6 +1,7 @@
 ﻿namespace Paperspace
 {
     using Newtonsoft.Json;
+    using Newtonsoft.Json.Converters;
     using System;
 
     [JsonObject(ItemNullValueHandling = NullValueHandling.Ignore)]
@@ -40,6 +41,7 @@
         /// Optional datetime created value to match on
         /// </summary>
         [JsonProperty("dtCreated")]
+        [JsonConverter(typeof(IsoDateTimeConverter))]
         public DateTime? DTCreated
         {
             get;

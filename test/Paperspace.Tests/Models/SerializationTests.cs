@@ -32,6 +32,14 @@
         }
 
         [TestMethod]
+        public void Can_Serialize_JobLog()
+        {
+            var json = System.IO.File.ReadAllText("./Fixtures/Jobs_Logs.json");
+            var jobLogs = JsonConvert.DeserializeObject<IList<JobLog>>(json);
+            JsonConvert.SerializeObject(jobLogs[0]);
+        }
+
+        [TestMethod]
         public void Can_Serialize_JobMachine()
         {
             var json = System.IO.File.ReadAllText("./Fixtures/Jobs_MachineTypes.json");
@@ -99,7 +107,7 @@
         public void Can_Serialize_CreateResourceDelegation()
         {
             var json = System.IO.File.ReadAllText("./Fixtures/ResourceDelegations_CreateDelegation.json");
-            var resourceDelegations = JsonConvert.DeserializeObject<IList<ResourceDelegation>>(json);
+            var resourceDelegations = JsonConvert.DeserializeObject<ResourceDelegation>(json);
             JsonConvert.SerializeObject(resourceDelegations);
         }
 

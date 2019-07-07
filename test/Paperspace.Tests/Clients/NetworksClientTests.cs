@@ -24,7 +24,7 @@
             var networksClient = new NetworksClient(connection.Object);
             var result = await networksClient.List();
 
-            Assert.AreEqual(result.Count, 1);
+            Assert.AreEqual(1, result.Count);
         }
 
         [TestMethod]
@@ -50,7 +50,7 @@
                 TeamId = "asdf"
             });
 
-            Assert.AreEqual(result.Count, 1);
+            Assert.AreEqual(1, result.Count);
         }
     }
 }

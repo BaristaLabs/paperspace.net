@@ -19,10 +19,14 @@
 
         public Task<MachineAvailability> Availability(Region region, MachineType type)
         {
-            return Connection.Get<MachineAvailability>(ApiUrls.MachinesAvailability(), new Dictionary<string, string> {
-                { "region", JsonConvert.SerializeObject(region) },
-                { "machineType", JsonConvert.SerializeObject(type) }
-            });
+            var anonParameters = new
+            {
+                region,
+                machineType = type
+            };
+
+            var parameters = anonParameters.ToQueryStringDictionary();
+            return Connection.Get<MachineAvailability>(ApiUrls.MachinesAvailability(), parameters);
         }
 
         public Task<Machine> Create(CreateMachineRequest request)
@@ -35,9 +39,15 @@
             return Connection.Post<Machine>(ApiUrls.MachinesDestroy(machineId, releasePublicIp));
         }
 
-        public Task<IList<Machine>> List()
+        public Task<IList<Machine>> List(MachineFilter filter = null)
         {
-            return Connection.Get<IList<Machine>>(ApiUrls.MachinesList());
+            if (filter == null)
+            {
+                return Connection.Get<IList<Machine>>(ApiUrls.MachinesList());
+            }
+
+            var parameters = filter.ToQueryStringDictionary();
+            return Connection.Get<IList<Machine>>(ApiUrls.MachinesList(), parameters);
         }
 
         public Task Restart(string machineId)

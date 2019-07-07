@@ -1,0 +1,17 @@
+﻿{
+  "ResponseMetadata": { "RequestId": "8ad93cf5-a0dd-11e9-b43c-0995ea0c422d" },
+  "Credentials": {
+    "AccessKeyId": "ASIAVWO7J5OJ5QIRZLUC",
+    "SecretAccessKey": "haDf/IbPOf0nrKd1lnbS8jC08ylrKDBZ30t0niSk",
+    "SessionToken": "FQoGZXIvYXdzEAMaDMYdiZVuXXwlYitmyiL5AuWzpmneKKhdYaYC5r9v0HIClKeOMh6yP3I9qfoeNO/moOid8+LShVAdzPclIjh7gUyZxsFy1ufsddOc/gCljc9mtI3b7wOYYrB7Wua9b2dJ2Q72K3pUJejPXVtST/EzwMCIBz5tqL2ohmwZxi5TtVNixGiu4bVG5UdWv+WIsMJWjwNVZspFxQnL3EGpt0dC+8hgw6XZWuRYsm4MQFYX+QZmNmV0etbzQGRi1TtElv7fCbNw9NrzNz9+ZIshH/qj/GzvxyA/BOC9CEnhAz8ZHyFIgmji5l86auWEbqDBlLmQYzpE+ZFnxt41qln5OKSs5yIux+oAadZZinaRU8JDlzJtb9IeXGFYXZKNJjOABAEiIMVv0lndgKk6aDbFAfjiDQqC6RZz/1zk3ltpXmf1KWhb7YeiV+DqvdFSbszZ4BBMaN9espp4eSzeaygLd3VdJ1v1ZISWEL3Eur+g1mimgeRKpg/T5zkEbMHIH6i8TfeHhCPpknvv7pQ6KMLaiOkF",
+    "Expiration": "2019-07-08T01:34:58.000Z"
+  },
+  "FederatedUser": {
+    "FederatedUserId": "391847209875:jfsryvbvcgc4r",
+    "Arn": "arn:aws:sts::391847209875:federated-user/jfsryvbvcgc4r"
+  },
+  "PackedPolicySize": 38,
+  "bucket": "ps-projects",
+  "folder": "prb8cvuof/jfsryvbvcgc4r/artifacts",
+  "project": "prb8cvuof"
+}

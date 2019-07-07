@@ -23,7 +23,7 @@
             var templateClient = new TemplatesClient(connection.Object);
             var result = await templateClient.List();
 
-            Assert.AreEqual(result.Count, 14);
+            Assert.AreEqual(14, result.Count);
         }
 
         [TestMethod]
@@ -50,7 +50,7 @@
                 TeamId = "12354"
             });
 
-            Assert.AreEqual(result.Count, 14);
+            Assert.AreEqual(14, result.Count);
         }
     }
 }

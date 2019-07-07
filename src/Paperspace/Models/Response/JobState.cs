@@ -17,6 +17,12 @@
         Pending,
 
         /// <summary>
+        /// The job has been provisioned, but is not yet running
+        /// </summary>
+        [EnumMember(Value = "Provisioned")]
+        Provisioned,
+
+        /// <summary>
         /// The job is setting up on a machine, running, or tearing down
         /// </summary>
         [EnumMember(Value = "Running")]

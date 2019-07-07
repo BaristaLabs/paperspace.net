@@ -35,7 +35,7 @@ steps:
     dotnet tool install nbgv --tool-path tools
     cd $(Build.SourcesDirectory)/src/Paperspace
     $(Build.SourcesDirectory)/tools/nbgv cloud
-  displayName: Use NBGV to set Assembly and NuGet Version
+  displayName: Use NBGV to set build number from version+git
 
 - task: DotNetCoreCLI@2
   displayName: Build
@@ -48,7 +48,7 @@ steps:
   inputs:
     command: test
     projects: 'test/Paperspace.Tests/Paperspace.Tests.csproj'
-    arguments: '--no-restore --configuration $(BuildConfiguration) /p:CollectCoverage=true /p:CoverletOutputFormat=cobertura'
+    arguments: '--no-restore --configuration $(BuildConfiguration) /p:CollectCoverage=true /p:CoverletOutputFormat=cobertura /p:ExcludeByAttribute="Obsolete%2cGeneratedCode"'
 
 - task: Palmmedia.reportgenerator.reportgenerator-build-release-task.reportgenerator@4
   displayName: Create code coverage report

@@ -42,6 +42,7 @@
             LogsConnection = logsConnection;
 
             // Initialize Clients
+            Jobs = new JobsClient(connection, logsConnection);
             Machines = new MachinesClient(connection);
             Networks = new NetworksClient(connection);
             Scripts = new ScriptsClient(connection);

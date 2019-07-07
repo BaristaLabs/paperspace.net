@@ -53,5 +53,16 @@
         TPU,
         [EnumMember(Value = "GradientNode")]
         GradientNode,
+
+        [EnumMember(Value = "GV100")]
+        GV100,
+        [EnumMember(Value = "GV100x8")]
+        GV100x8,
+        [EnumMember(Value = "G1")]
+        G1,
+        [EnumMember(Value = "G6")]
+        G6,
+        [EnumMember(Value = "G12")]
+        G12,
     }
 }

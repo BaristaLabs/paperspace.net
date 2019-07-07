@@ -24,7 +24,7 @@
             var usersClient = new UsersClient(connection.Object);
             var result = await usersClient.List();
 
-            Assert.AreEqual(result.Count, 2);
+            Assert.AreEqual(2, result.Count);
         }
 
         [TestMethod]
@@ -49,7 +49,7 @@
                 TeamId = "asdf"
             });
 
-            Assert.AreEqual(result.Count, 2);
+            Assert.AreEqual(2, result.Count);
         }
     }
 }
