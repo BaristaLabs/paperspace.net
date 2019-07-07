@@ -68,7 +68,7 @@ var job = await client.Jobs.Create(new CreateJobRequest()
 await client.Jobs.Waitfor(job.Id, JobState.Stopped, pollResultCallback: (j) => Console.WriteLine(j.State));
 ```
 
-Other samples [available here](https://github.com/BaristaLabs/paperspace.net/tree/master/samples)
+Other samples [available here](https://github.com/BaristaLabs/paperspace.net/blob/master/samples/PaperspaceConsoleTest/Program.cs)
 
 # ```Paperspace.Net``` -> ```Paperspace API``` Versioning
 
