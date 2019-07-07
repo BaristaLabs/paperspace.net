@@ -24,14 +24,14 @@
               .Build();
 
             var client = new PaperspaceClient(config["PAPERSPACE_API_KEY"]);
-            //var machine = await GetOrCreateMachine(client);
-            //await MachineCycleSample(client, machine);
-            //await ResourceDelegationSample(client, machine);
-            //await DestroyMachine(client, machine);
+            var machine = await GetOrCreateMachine(client);
+            await MachineCycleSample(client, machine);
+            await ResourceDelegationSample(client, machine);
+            await DestroyMachine(client, machine);
 
-            //await ScriptFullLifecycleSample(client);
-            //await NetworksSample(client);
-            //await UsersSample(client);
+            await ScriptFullLifecycleSample(client);
+            await NetworksSample(client);
+            await UsersSample(client);
 
             await JobsSample(client);
 

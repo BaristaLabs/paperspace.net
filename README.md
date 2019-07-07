@@ -8,9 +8,17 @@
 
 Paperspace is a client library for .NET Standard 2.0 and above that provides an easy way to interact with the [Paperspace API](https://paperspace.github.io/paperspace-node/index.html).
 
-## Usage examples
+With Paperspace.Net you can:
 
-Get available templates.
+  - Create a new GPU-backed Windows VM based on a pre-built template and run a script on startup (Minutes)
+  - Start a stopped GPU-backed Windows VM and run a PowerShell script on startup to perform an action, then shut it down. (Seconds)
+  - Create a job that starts a Linux-based Docker container from a public or private docker hub, runs a command, and downloads the result (Seconds)
+  - Create a queue-triggerd Azure Function to perform web crawling activities that run in GPU-backed containers.
+  - Create an Azure Durable Functions based orchestration that starts VMs based on incoming website requests and automatically streams the desktop to Azure Media Services.
+
+# Usage examples
+
+Get available machine templates.
 
 ```c#
 var paperspace = new PaperspaceClient("<Paperspace API Key>");
@@ -30,10 +38,23 @@ var newMachine = await client.Machines.Create(new CreateMachineRequest
     BillingType = BillingType.Hourly,
     MachineName = "My Machine 1",
     TemplateId = w10template.Id,
+	ScriptId: "s12345"
 });
 ```
 
-Create a new job and wait until it completes
+Create a new Script
+``` c#
+ var newScript = await client.Scripts.Create(new CreateScriptRequest
+{
+    ScriptName = "My Script",
+    ScriptText = "echo Hello, World!",
+    ScriptDescription = "A startup script",
+    IsEnabled = true,
+    RunOnce = false
+});
+```
+
+Create a new job using jess/tetris:latest and wait until it completes
 
 ``` c#
 var job = await client.Jobs.Create(new CreateJobRequest()
@@ -48,3 +69,20 @@ await client.Jobs.Waitfor(job.Id, JobState.Stopped, pollResultCallback: (j) => C
 ```
 
 Other samples [available here](https://github.com/BaristaLabs/paperspace.net/tree/master/samples)
+
+# ```Paperspace.Net``` -> ```Paperspace API``` Versioning
+
+Paperspace.Net moves at a different cadence than the Paperspace API. The following table describes the version mapping.
+
+| ```Paperspace.Net``` | ```PaperSpace API``` |
+|:---:|:---:|
+| 1.0.x | 0.1.17 |
+
+
+# Development
+
+This repository is a mono-repo consisting of the following:
+
+/src/Paperspace -> The Paperspace API Client
+
+/src/Paperspace.PowerShell -> Paperspace Powershell Cmdlets (Under development)
