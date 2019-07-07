@@ -10,9 +10,9 @@ Paperspace.net is a client library for .NET Standard 2.0 and above that provides
 
 With Paperspace.Net you can:
 
-  - Create a new GPU-backed Windows VM based on a pre-built template and run a script on startup (Minutes)
-  - Start a stopped GPU-backed Windows VM and run a PowerShell script on startup to perform an action, then shut it down. (Seconds)
-  - Create a job that starts a Linux-based Docker container from a public or private docker hub, runs a command, and downloads the result (Seconds)
+  - Create an application to start a new GPU-backed Windows VM based on a pre-built template and run a script on startup (Minutes)
+  - Create an application to start a stopped GPU-backed Windows VM and run a PowerShell script on startup to perform an action, then shut it down. (Seconds)
+  - Create a process that starts a Linux-based Docker container from a public or private docker hub, runs a command, and downloads the result (Seconds)
   - Create a queue-triggered Azure Function to perform web crawling activities that run in GPU-backed containers.
   - Create an Azure Durable Functions based orchestration that starts VMs based on incoming website requests and automatically streams the desktop to Azure Media Services.
 
