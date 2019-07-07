@@ -3,6 +3,7 @@
     using Microsoft.VisualStudio.TestTools.UnitTesting;
     using Moq;
     using Newtonsoft.Json;
+    using Newtonsoft.Json.Linq;
     using System;
     using System.Collections.Generic;
     using System.Threading;
@@ -64,13 +65,13 @@
         public async Task JobsClient_ArtifactsGet_HappyPath()
         {
             var connection = new Mock<IConnection>();
-            connection.Setup(c => c.Get<Artifact>(ApiUrls.JobsArtifactsGet("j123abc"), null))
+            connection.Setup(c => c.Get<JObject>(ApiUrls.JobsArtifactsGet("j123abc"), null))
                 .ReturnsAsync(() =>
                 {
-                    var json = System.IO.File.ReadAllText("./Fixtures/Jobs_ArtifactsList.json");
-                    var artifacts = JsonConvert.DeserializeObject<IList<Artifact>>(json);
-                    return artifacts[0];
+                    var json = System.IO.File.ReadAllText("./Fixtures/Jobs_ArtifactsGet.json");
+                    return JObject.Parse(json);
                 });
+
             var logsConnection = new Mock<IConnection>();
             var jobsClient = new JobsClient(connection.Object, logsConnection.Object);
             var result = await jobsClient.ArtifactsGet("j123abc");
@@ -82,12 +83,11 @@
         public async Task JobsClient_ArtifactsGet_With_Parameters()
         {
             var connection = new Mock<IConnection>();
-            connection.Setup(c => c.Get<Artifact>(ApiUrls.JobsArtifactsGet("j123abc"), It.IsAny<IDictionary<string, string>>()))
+            connection.Setup(c => c.Get<JObject>(ApiUrls.JobsArtifactsGet("j123abc"), It.IsAny<IDictionary<string, string>>()))
                 .ReturnsAsync(() =>
                 {
-                    var json = System.IO.File.ReadAllText("./Fixtures/Jobs_ArtifactsList.json");
-                    var artifacts = JsonConvert.DeserializeObject<IList<Artifact>>(json);
-                    return artifacts[0];
+                    var json = System.IO.File.ReadAllText("./Fixtures/Jobs_ArtifactsGet.json");
+                    return JObject.Parse(json);
                 });
             var logsConnection = new Mock<IConnection>();
             var jobsClient = new JobsClient(connection.Object, logsConnection.Object);

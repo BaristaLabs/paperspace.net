@@ -24,14 +24,14 @@
               .Build();
 
             var client = new PaperspaceClient(config["PAPERSPACE_API_KEY"]);
-            var machine = await GetOrCreateMachine(client);
-            await MachineCycleSample(client, machine);
-            await ResourceDelegationSample(client, machine);
-            await DestroyMachine(client, machine);
+            //var machine = await GetOrCreateMachine(client);
+            //await MachineCycleSample(client, machine);
+            //await ResourceDelegationSample(client, machine);
+            //await DestroyMachine(client, machine);
 
-            await ScriptFullLifecycleSample(client);
-            await NetworksSample(client);
-            await UsersSample(client);
+            //await ScriptFullLifecycleSample(client);
+            //await NetworksSample(client);
+            //await UsersSample(client);
 
             await JobsSample(client);
 
@@ -301,6 +301,62 @@
             Console.WriteLine("Listing Job Machine Types...");
             var machineTypes = await client.Jobs.MachineTypes();
             Console.WriteLine(JsonConvert.SerializeObject(machineTypes, Formatting.Indented));
+
+            // ----
+            // Create a new Job using jess/tetris
+            // ----
+
+            Console.WriteLine("Creating a Job...");
+            var job = await client.Jobs.Create(new CreateJobRequest()
+            {
+                Name = "Tetris",
+                Container = "jess/tetris:latest",
+                Command = "echo Hello, World! && echo 'Hello Paperspace!' > /artifacts/hello.txt",
+                MachineType = MachineType.C2,
+                Project = "Mah Tetris Project"
+            });
+
+            Console.WriteLine("Listing Jobs...");
+            var jobs = await client.Jobs.List();
+            Console.WriteLine(JsonConvert.SerializeObject(jobs, Formatting.Indented));
+
+            job = await client.Jobs.Waitfor(job.Id, JobState.Stopped, 2000, 0, (j) => Console.WriteLine(j.State));
+
+            // ----
+            // Retrieve the logs associated with the job.
+            // ----
+            Console.WriteLine("Getting Job Logs...");
+            var logs = await client.Jobs.Logs(job.Id);
+            Console.WriteLine(JsonConvert.SerializeObject(logs, Formatting.Indented));
+
+            // ----
+            // Get artifacts
+            // ----
+
+            Console.WriteLine("Listing Artifacts...");
+            var artifacts = await client.Jobs.ArtifactsList(job.Id);
+            Console.WriteLine(JsonConvert.SerializeObject(artifacts, Formatting.Indented));
+
+            Console.WriteLine("Get Artifacts...");
+            var artifactsData = await client.Jobs.ArtifactsGet(job.Id);
+            Console.WriteLine(JsonConvert.SerializeObject(artifactsData, Formatting.Indented));
+
+            Console.WriteLine("Destroy Artifacts...");
+            await client.Jobs.ArtifactsDestroy(job.Id);
+
+            // ----
+            // Clone
+            // ----
+            Console.WriteLine("Cloning job...");
+            var clonedJob = await client.Jobs.Clone(job.Id);
+            await client.Jobs.Waitfor(clonedJob.Id, JobState.Stopped, 2000, 0, (j) => Console.WriteLine(j.State));
+
+            // ----
+            // Cleanup
+            // ----
+            Console.WriteLine("Destroy the jobs...");
+            await client.Jobs.Destroy(clonedJob.Id);
+            await client.Jobs.Destroy(job.Id);
         }
     }
 }

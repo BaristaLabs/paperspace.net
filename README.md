@@ -18,6 +18,7 @@ var templates = await paperspace.Templates.List();
 var w10template = templates.FirstOrDefault(t => t.OS == "Windows 10 (Server 2019) - Licensed");
 Console.WriteLine(w10template.Label + " is available for creation!");
 ```
+
 Create new virtual machine
 
 ``` c#
@@ -30,6 +31,20 @@ var newMachine = await client.Machines.Create(new CreateMachineRequest
     MachineName = "My Machine 1",
     TemplateId = w10template.Id,
 });
+```
+
+Create a new job and wait until it completes
+
+``` c#
+var job = await client.Jobs.Create(new CreateJobRequest()
+{
+    Name = "Tetris",
+    Container = "jess/tetris:latest",
+    Command = "echo Hello, World! && echo 'Hello Paperspace!' > /artifacts/hello.txt",
+    MachineType = MachineType.C2,
+    Project = "Mah Tetris Project"
+});
+await client.Jobs.Waitfor(job.Id, JobState.Stopped, pollResultCallback: (j) => Console.WriteLine(j.State));
 ```
 
 Other samples [available here](https://github.com/BaristaLabs/paperspace.net/tree/master/samples)

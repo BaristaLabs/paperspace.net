@@ -1,5 +1,6 @@
 ﻿namespace Paperspace
 {
+    using Newtonsoft.Json.Linq;
     using System;
     using System.Collections.Generic;
     using System.Threading;
@@ -36,15 +37,15 @@
             return Connection.Post(ApiUrls.JobsArtifactsDestroy(jobId), query);
         }
 
-        public Task<Artifact> ArtifactsGet(string jobId, GetArtifactsParameters parameters = null)
+        public Task<JObject> ArtifactsGet(string jobId, GetArtifactsParameters parameters = null)
         {
             if (parameters == null)
             {
-                return Connection.Get<Artifact>(ApiUrls.JobsArtifactsGet(jobId), null);
+                return Connection.Get<JObject>(ApiUrls.JobsArtifactsGet(jobId), null);
             }
 
             var query = parameters.ToQueryStringDictionary();
-            return Connection.Get<Artifact>(ApiUrls.JobsArtifactsGet(jobId), query);
+            return Connection.Get<JObject>(ApiUrls.JobsArtifactsGet(jobId), query);
         }
 
         public Task<IList<Artifact>> ArtifactsList(string jobId, ListArtifactsParameters parameters = null)

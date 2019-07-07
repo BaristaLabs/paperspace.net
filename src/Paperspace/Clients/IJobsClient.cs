@@ -1,5 +1,6 @@
 ﻿namespace Paperspace
 {
+    using Newtonsoft.Json.Linq;
     using System;
     using System.Collections.Generic;
     using System.Threading.Tasks;
@@ -17,10 +18,13 @@
         /// <summary>
         /// Get the artifacts files for the job with the given id. The name of a particular file, or directory can be specified, and can include a wildcard character at the end, e.g., "myfiles"*. If no specifc file or directory is specified all artifact files will be retrieved.
         /// </summary>
+        /// <remarks>
+        /// This method returns a AWS S3 descriptor that can be used to retrieve the actual binary data.
+        /// </remarks>
         /// <param name="jobId"></param>
         /// <param name="parameters"></param>
         /// <returns></returns>
-        Task<Artifact> ArtifactsGet(string jobId, GetArtifactsParameters parameters = null);
+        Task<JObject> ArtifactsGet(string jobId, GetArtifactsParameters parameters = null);
 
         /// <summary>
         /// List job artifact files for the specified job.
