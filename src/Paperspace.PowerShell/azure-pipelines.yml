@@ -1,3 +1,6 @@
+variables:
+  configuration: Release
+  
 pool:
   name: Hosted Ubuntu 1604
   
@@ -24,20 +27,22 @@ steps:
   displayName: Restore
   inputs:
     command: restore
-    projects: '**/*.csproj'
+    projects: |
+      src/Paperspace.PowerShell/Paperspace.PowerShell.csproj
+      test/Paperspace.PowerShell.Tests/Paperspace.PowerShell.Tests.csproj
 
 - task: DotNetCoreCLI@2
   displayName: Build
   inputs:
-    projects: '**/*.csproj'
-    arguments: '--no-restore --configuration Release'
+    projects: 'src/Paperspace.PowerShell/Paperspace.PowerShell.csproj'
+    arguments: '--no-restore --configuration $(configuration)'
 
 - task: DotNetCoreCLI@2
   displayName: Test
   inputs:
     command: test
-    projects: 'test/**/*.csproj'
-    arguments: '--no-restore --configuration Release /p:CollectCoverage=true /p:CoverletOutputFormat=cobertura'
+    projects: 'test/Paperspace.PowerShell.Tests/Paperspace.PowerShell.Tests.csproj'
+    arguments: '--no-restore --configuration $(configuration) /p:CollectCoverage=true /p:CoverletOutputFormat=cobertura'
 
 - task: Palmmedia.reportgenerator.reportgenerator-build-release-task.reportgenerator@4
   displayName: Create code coverage report
@@ -67,7 +72,7 @@ steps:
   condition: and(succeeded(), eq(variables['Build.SourceBranch'], 'refs/heads/master'))
   inputs:
     command: pack
-    packagesToPack: src/Paperspace/Paperspace.csproj
+    packagesToPack: src/Paperspace.PowerShell/Paperspace.PowerShell.csproj
     includesymbols: true
 
 - task: NuGetCommand@2
@@ -77,6 +82,7 @@ steps:
     command: push
     nuGetFeedType: external
     publishFeedCredentials: 'nuget.org'
+    allowPackageConflicts: true
     continueOnError: true
 
 - task: PublishBuildArtifacts@1
