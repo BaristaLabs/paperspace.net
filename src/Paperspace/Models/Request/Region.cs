@@ -15,5 +15,11 @@
 
         [EnumMember(Value = "Europe (AMS1)")]
         Europe_AMS1,
+
+        [EnumMember(Value = "GCP West")]
+        GCP_West,
+
+        [EnumMember(Value = "GCP East")]
+        GCP_East,
     }
 }

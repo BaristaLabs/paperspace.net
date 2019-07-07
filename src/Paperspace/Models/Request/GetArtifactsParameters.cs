@@ -17,15 +17,5 @@
             get;
             set;
         }
-
-        /// <summary>
-        /// Optional; an existing directory to copy the artifacts files to.
-        /// </summary>
-        [JsonProperty("dest")]
-        public string Dest
-        {
-            get;
-            set;
-        }
     }
 }

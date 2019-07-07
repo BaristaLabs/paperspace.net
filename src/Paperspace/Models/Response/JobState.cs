@@ -29,6 +29,12 @@
         Stopped,
 
         /// <summary>
+        /// The job was preempted
+        /// </summary>
+        [EnumMember(Value = "Preempted")]
+        Preempted,
+
+        /// <summary>
         /// The job was unable to setup or run to normal completion
         /// </summary>
         [EnumMember(Value = "Error")]

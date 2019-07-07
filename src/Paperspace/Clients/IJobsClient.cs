@@ -1,5 +1,6 @@
 ﻿namespace Paperspace
 {
+    using System;
     using System.Collections.Generic;
     using System.Threading.Tasks;
 
@@ -19,7 +20,7 @@
         /// <param name="jobId"></param>
         /// <param name="parameters"></param>
         /// <returns></returns>
-        Task ArtifactsGet(string jobId, GetArtifactsParameters parameters = null);
+        Task<Artifact> ArtifactsGet(string jobId, GetArtifactsParameters parameters = null);
 
         /// <summary>
         /// List job artifact files for the specified job.
@@ -67,7 +68,7 @@
         /// </summary>
         /// <param name="filter"></param>
         /// <returns></returns>
-        Task<IList<Machine>> MachineTypes(MachineTypeFilter filter);
+        Task<IList<JobMachine>> MachineTypes(MachineTypeFilter filter = null);
 
         /// <summary>
         /// Show job information for the job with the given id.
@@ -97,6 +98,6 @@
         /// </remarks>
         /// <param name="jobId"></param>
         /// <returns></returns>
-        Task WaitFor(string jobId, JobState targetState);
+        Task<Job> Waitfor(string jobId, JobState state, int pollIntervalMS = 5000, int maxWaitMS = 0, Action<Job> pollResultCallback = null);
     }
 }

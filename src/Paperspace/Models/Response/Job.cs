@@ -21,7 +21,7 @@
         }
 
         [JsonProperty("state")]
-        public string State
+        public JobState State
         {
             get;
             set;

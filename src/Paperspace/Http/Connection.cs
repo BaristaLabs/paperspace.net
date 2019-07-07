@@ -13,17 +13,12 @@
     /// </summary>
     public class Connection : IConnection
     {
-        private static readonly Uri s_defaultPaperspaceApiUrl = PaperspaceClient.PaperspaceApiUrl;
-        private static readonly HttpClient s_defaultPaperspaceHttpClient = new HttpClient();
-
-        public Connection(string apiKey)
-            : this(apiKey, s_defaultPaperspaceApiUrl, s_defaultPaperspaceHttpClient)
-        {
-
-        }
-
         public Connection(string apiKey, Uri baseAddress, HttpClient httpClient)
         {
+            Ensure.ArgumentNotNullOrEmptyString(apiKey, nameof(apiKey));
+            Ensure.ArgumentNotNull(baseAddress, nameof(baseAddress));
+            Ensure.ArgumentNotNull(httpClient, nameof(httpClient));
+
             httpClient.BaseAddress = baseAddress;
             httpClient.DefaultRequestHeaders.Add("x-api-key", apiKey);
             HttpClient = httpClient;

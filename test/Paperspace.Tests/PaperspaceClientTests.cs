@@ -9,8 +9,9 @@
         [TestMethod]
         public void Can_Construct_Paperspace_Client()
         {
-            var connection = new Mock<IConnection>();
-            var client = new PaperspaceClient(connection.Object);
+            var connectionMock = new Mock<IConnection>();
+            var logsConnectionMock = new Mock<IConnection>();
+            var client = new PaperspaceClient(connectionMock.Object, logsConnectionMock.Object);
             Assert.IsNotNull(client);
 
 
@@ -21,9 +22,11 @@
         [TestMethod]
         public void Can_Access_Properties()
         {
-            var connection = new Mock<IConnection>();
-            var client = new PaperspaceClient(connection.Object);
-            Assert.ReferenceEquals(connection, client.Connection);
+            var connectionMock = new Mock<IConnection>();
+            var logsConnectionMock = new Mock<IConnection>();
+            var client = new PaperspaceClient(connectionMock.Object, logsConnectionMock.Object);
+            Assert.ReferenceEquals(connectionMock, client.Connection);
+            Assert.ReferenceEquals(logsConnectionMock, client.LogsConnection);
             Assert.IsNotNull(client.Machines);
             Assert.IsNotNull(client.Networks);
             Assert.IsNotNull(client.Scripts);

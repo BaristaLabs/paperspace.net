@@ -1,0 +1,26 @@
+﻿[
+  {
+    "region": "East Coast (NY2)",
+    "cluster": "PS Jobs",
+    "machineType": "P5000",
+    "isBusy": false,
+  },
+  {
+    "region": "East Coast (NY2)",
+    "cluster": "PS Jobs",
+    "machineType": "V100",
+    "isBusy": false,
+  },
+  {
+    "region": "GCP West",
+    "cluster": "PS Jobs on GCP",
+    "machineType": "K80",
+    "isBusy": false,
+  },
+  {
+    "region": "GCP West",
+    "cluster": "PS Jobs on GCP",
+    "machineType": "P100",
+    "isBusy": false,
+  }
+]

@@ -52,7 +52,7 @@
         /// Optional state value to match on
         /// </summary>
         [JsonProperty("state")]
-        public MachineState State
+        public JobState State
         {
             get;
             set;

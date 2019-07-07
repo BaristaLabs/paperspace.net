@@ -44,6 +44,14 @@
         [EnumMember(Value = "C9")]
         C9,
         [EnumMember(Value = "C10")]
-        C10
+        C10,
+        [EnumMember(Value = "K80")]
+        K80,
+        [EnumMember(Value = "P100")]
+        P100,
+        [EnumMember(Value = "TPU")]
+        TPU,
+        [EnumMember(Value = "GradientNode")]
+        GradientNode,
     }
 }

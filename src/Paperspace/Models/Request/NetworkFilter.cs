@@ -30,7 +30,7 @@
         /// Optional region to match on
         /// </summary>
         [JsonProperty("region")]
-        public Region Region
+        public Region? Region
         {
             get;
             set;

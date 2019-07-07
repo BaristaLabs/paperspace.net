@@ -146,14 +146,14 @@
 
             // ACT
             var result = await subjectUnderTest
-               .Post<MockResponse>(new Uri("api/test/whatever", UriKind.Relative), query, body);
+               .Post<MockResponse>(new Uri("api/test/whatever?baz=buz", UriKind.Relative), query, body);
 
             // ASSERT
             Assert.IsNotNull(result);
             Assert.AreEqual(result.Id, 1);
 
-            // also check the 'http' call was like we expected it
-            var expectedUri = new Uri("https://api.paperspace.io/api/test/whatever?foo=bar");
+            // also check the 'http' call was like we expected it - joining query params both in the initial url and in the query dictionary.
+            var expectedUri = new Uri("https://api.paperspace.io/api/test/whatever?baz=buz&foo=bar");
 
             handlerMock.Protected().Verify(
                "SendAsync",
@@ -307,13 +307,6 @@
                ),
                ItExpr.IsAny<CancellationToken>()
             );
-        }
-
-        [TestMethod]
-        public void Can_Construct_Connection_With_Default_Uri_And_HttpClient()
-        {
-            var subjectUnderTest = new Connection("12345");
-            Assert.IsNotNull(subjectUnderTest);
         }
 
         private class MockRequest

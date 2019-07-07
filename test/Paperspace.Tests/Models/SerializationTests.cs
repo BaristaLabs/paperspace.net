@@ -8,6 +8,38 @@
     public class SerializationTests
     {
         [TestMethod]
+        public void Can_Serialize_Artifact()
+        {
+            var json = System.IO.File.ReadAllText("./Fixtures/Jobs_ArtifactsList.json");
+            var artifacts = JsonConvert.DeserializeObject<IList<Artifact>>(json);
+            JsonConvert.SerializeObject(artifacts[0]);
+        }
+
+        [TestMethod]
+        public void Can_Serialize_CreateJobRequest()
+        {
+            var json = System.IO.File.ReadAllText("./Fixtures/Jobs_Create_Request.json");
+            var createJobRequest = JsonConvert.DeserializeObject<CreateJobRequest>(json);
+            JsonConvert.SerializeObject(createJobRequest);
+        }
+
+        [TestMethod]
+        public void Can_Serialize_Job()
+        {
+            var json = System.IO.File.ReadAllText("./Fixtures/Jobs_Show.json");
+            var job = JsonConvert.DeserializeObject<Job>(json);
+            JsonConvert.SerializeObject(job);
+        }
+
+        [TestMethod]
+        public void Can_Serialize_JobMachine()
+        {
+            var json = System.IO.File.ReadAllText("./Fixtures/Jobs_MachineTypes.json");
+            var machineTypes = JsonConvert.DeserializeObject<IList<JobMachine>>(json);
+            JsonConvert.SerializeObject(machineTypes[0]);
+        }
+
+        [TestMethod]
         public void Can_Serialize_CreateMachineRequest()
         {
             var json = System.IO.File.ReadAllText("./Fixtures/Machines_CreateMachine_Request.json");

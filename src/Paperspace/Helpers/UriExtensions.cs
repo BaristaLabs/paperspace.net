@@ -1,5 +1,6 @@
 ﻿namespace Paperspace
 {
+    using Newtonsoft.Json.Linq;
     using System;
     using System.Collections.Generic;
     using System.Collections.Specialized;
@@ -8,6 +9,21 @@
 
     public static class UriExtensions
     {
+        public static IDictionary<string, string> ToQueryStringDictionary(this object obj)
+        {
+            var parameters = new Dictionary<string, string>();
+            var jObj = JObject.FromObject(obj);
+            foreach (var property in jObj)
+            {
+                if (property.Value != null)
+                {
+                    parameters.Add(property.Key, property.Value.ToString());
+                }
+            }
+
+            return parameters;
+        }
+
         /// <summary>
         ///     Adds query string value to an existing url, both absolute and relative URI's are supported.
         /// </summary>
