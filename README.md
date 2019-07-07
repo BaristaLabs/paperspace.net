@@ -81,8 +81,11 @@ Paperspace.Net moves at a different cadence than the Paperspace API. The followi
 
 # Development
 
-This repository is a mono-repo consisting of the following:
+This repository is a monorepo consisting of the following:
 
-/src/Paperspace -> The Paperspace API Client
+|   Path   | Description |
+|---------:|:------------|
+| /src/Paperspace | .Net Paperspace API Client |
+| /src/Paperspace.PowerShell | Paperspace Powershell Cmdlets (Under development) |
 
-/src/Paperspace.PowerShell -> Paperspace Powershell Cmdlets (Under development)
+Feel free to clone and code. Pull requests accepted!
