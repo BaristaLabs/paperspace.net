@@ -33,8 +33,8 @@ steps:
 
 - script: |
     dotnet tool install nbgv --tool-path tools
-    cd ./src/Paperspace
-    ./tools/nbgv cloud
+    cd $(Build.SourcesDirectory)/src/Paperspace
+    $(Build.SourcesDirectory)/tools/nbgv cloud
   displayName: Use NBGV to set Assembly and NuGet Version
 
 - task: DotNetCoreCLI@2
